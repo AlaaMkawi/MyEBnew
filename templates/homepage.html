@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Website Layout | CodingLab</title> 
+    <title> Website Layout | Welcome :)</title> 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
    </head>
@@ -12,11 +12,11 @@
   <nav>
     <div class="menu">
       <div class="logo">
-        <a href="#">CodingLab</a>
+        <a href="#">Welcome :)</a>
       </div>
       <ul>
-        <li><a href="{% url 'loginpsycholist' %}">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="{% url 'loginpsycholist' %}">Login-psycholist</a></li>
+        <li><a href="{% url 'loginpediatrician' %}">Login-pediatrician</a></li>
         <li><a href="#">Services</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Feedback</a></li>
@@ -25,13 +25,12 @@
   </nav>
   <div class="img"></div>
   <div class="center">
-    <div class="title">Create Amazing Website</div>
-    <div class="sub_title">Pure HTML & CSS Only</div>
-    <div class="btns">
-      <button>Learn More</button>
-      <button>Subscribe</button>
+    <div class="title">MyEB</div>
+    <div class="sub_title">Make Your Experience Better </div>
+   
+      
+    
     </div>
-  </div>
 </body>
 </html>
 <style>
@@ -43,12 +42,12 @@
   font-family: 'Poppins',sans-serif;
 }
 ::selection{
-  color: #000;
+  color: #BC8F8F;
   background: #fff;
 }
 nav{
   position: fixed;
-  background: #1b1b1b;
+  background: #BC8F8F;
   width: 100%;
   padding: 10px 0;
   z-index: 12;
@@ -88,7 +87,7 @@ nav .menu{
 }
 .menu ul li a:hover{
   background: #fff;
-  color: black;
+  color: #BC8F8F;
 }
 .img{
   background: url('img3.jpg')no-repeat;
@@ -103,7 +102,7 @@ nav .menu{
   position: absolute;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgb(188, 143, 143);
 }
 .center{
   position: absolute;
@@ -147,10 +146,10 @@ nav .menu{
 }
 .btns button:first-child:hover{
   background: white;
-  color: black;
+  color: #FFE4E1;
 }
 .center .btns button:last-child{
   background: white;
-  color: black;
+  color: #FFE4E1;
 }
 </style>

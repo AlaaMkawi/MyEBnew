@@ -35,3 +35,28 @@ def index(request):
 
 def psychomepage(request):
     return render(request, 'pyschhomepage.html')
+
+#/-----------------
+def loginpediatrician(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            users_in_group = Group.objects.get(name='pediatrician').user_set.all()
+            if user in users_in_group:
+                login(request, user)
+                return redirect('pedhomepage')
+            else:
+                messages.info(request, 'username OR password incorrert')
+        else:
+            messages.info(request, 'username OR password incorrert')
+    context = {}
+    return render(request, 'loginpediatrician.html',context)
+
+from django.http import HttpResponse
+def index(request):
+    return render(request, 'homepage.html')
+
+def pedhomepage(request):
+    return render(request, 'pedhomepage.html')
