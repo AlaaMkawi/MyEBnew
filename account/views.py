@@ -60,3 +60,28 @@ def index(request):
 
 def pedhomepage(request):
     return render(request, 'pedhomepage.html')
+
+
+def loginParent(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            users_in_group = Group.objects.get(name='Parent').user_set.all()
+            if user in users_in_group:
+                login(request, user)
+                return redirect('parhomepage')
+            else:
+                messages.info(request, 'username OR password incorrert')
+        else:
+            messages.info(request, 'username OR password incorrert')
+    context = {}
+    return render(request, 'loginParent.html',context)
+
+from django.http import HttpResponse
+def index(request):
+    return render(request, 'homepage.html')
+
+def parhomepage(request):
+    return render(request, 'parhomepage.html')
