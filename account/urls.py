@@ -10,4 +10,9 @@ urlpatterns = [
     path('loginpsycholist/', views.loginpsycholist, name='loginpsycholist'),
     path('psychomepage/', views.psychomepage, name='psychomepage'),
 
+    path('loginpediatrician/', views.loginpediatrician, name='loginpediatrician'),
+    path('pedhomepage/', views.pedhomepage, name='pedhomepage'),
+
+
+
 ]

@@ -28,23 +28,6 @@ def loginpsycholist(request):
             messages.info(request, 'username OR password incorrert')
     context = {}
     return render(request, 'loginpsychologist.html',context)
-#
-# def loginAdmin(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             users_in_groub = Group.objects.get(name='Admin').user_set.all()
-#             if user in users_in_groub:
-#                 login(request, user)
-#                 return redirect('homepage_admin')
-#             else:
-#                 messages.info(request, 'Username OR Password incorrert')
-#         else:
-#             messages.info(request, 'username OR Password incorrert')
-#     context = {}
-#     return render(request, 'ourproject/log_in_admin.html', context)
 
 from django.http import HttpResponse
 def index(request):
@@ -52,3 +35,28 @@ def index(request):
 
 def psychomepage(request):
     return render(request, 'pyschhomepage.html')
+
+#/-----------------
+def loginpediatrician(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            users_in_group = Group.objects.get(name='pediatrician').user_set.all()
+            if user in users_in_group:
+                login(request, user)
+                return redirect('pedhomepage')
+            else:
+                messages.info(request, 'username OR password incorrert')
+        else:
+            messages.info(request, 'username OR password incorrert')
+    context = {}
+    return render(request, 'loginpediatrician.html',context)
+
+from django.http import HttpResponse
+def index(request):
+    return render(request, 'homepage.html')
+
+def pedhomepage(request):
+    return render(request, 'pedhomepage.html')
