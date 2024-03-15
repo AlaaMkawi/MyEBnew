@@ -23,7 +23,7 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$USER_HOME$/MyEBnew\templates" />
+        <option value="$MODULE_DIR$/../MyEBnew\templates" />
       </list>
     </option>
   </component>

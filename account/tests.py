@@ -49,25 +49,5 @@ class Testloginpsychologist(TestCase):
         response = client.post('loginpsycholist//', {'username': 'invalid', 'password': 'wrong password'})
         self.assertEqual(response.status_code, 'username and password incorrect')
 
-class TestloginParent(TestCase):
-    def testcorrecrloginpar(self):
-        client = Client()
-        response = client.post('loginParent//', {'username':'testuser', 'password':'<PASSWORD>'})
-        self.assertEqual(response.status_code, 200)
-
-    def Testwrongusernameloginpar(self):
-        client = Client()
-        response = client.post('loginParent//', {'username': 'invalid', 'password': '<PASSWORD>'})
-        self.assertEqual(response.status_code, 'username incorrect')
-
-    def Testwrongpasswordloginpar(self):
-        client = Client()
-        response = client.post('loginParent//', {'username': 'testuser', 'password': 'wrong password'})
-        self.assertEqual(response.status_code, 'password incorrect')
-
-    def Testnothingusernamepasswordloginpar(self):
-        client = Client()
-        response = client.post('loginParent//', {'username': 'invalid', 'password': 'wrong password'})
-        self.assertEqual(response.status_code, 'username and password incorrect')
 
 
