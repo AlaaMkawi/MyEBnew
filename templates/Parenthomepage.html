@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyEB - Home</title>
+    <style>
+        /* CSS כאן */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to MyEB</h1>
+    <nav>
+        <ul>
+             <li><a href="{% url 'aboutus' %}">About-Us</a></li>
+             <li><a href="{% url 'contactus' %}">Contact-Us</a></li>
+            <li><a href="{% url 'Schedule' %}">Schedule-Meeting</a></li>
+            <li><a href="{% url 'extrainfo' %}">Extra-Info</a></li>
+            
+            <!-- כאן נוסיף קישורים נוספים כפי שתרצה -->
+        </ul>
+    </nav>
+</header>
+
+<section id="about">
+    <h2>About Us</h2>
+    <p>At MyEB, we are dedicated to providing parents with the tools and resources they need to ensure the health and well-being of their infants up to the age of one. Our team of professionals, including pediatricians and psychologists, is committed to offering comprehensive care and support to families.</p>
+    <p>With our user-friendly platform, parents can access valuable information, schedule appointments, and connect with healthcare providers seamlessly.</p>
+</section>
+
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or need assistance, please feel free to contact us using the information below:</p>
+    <ul>
+        <li>Email: info@myeb.com</li>
+        <li>Phone: 123-456-7890</li>
+        <li>Address: 123 Main Street, City, Country</li>
+    </ul>
+    <p>We look forward to hearing from you!</p>
+</section>
+
+<section id="schedule">
+    <h2>Schedule</h2>
+    <p>To schedule an appointment with one of our healthcare providers, please contact us at:</p>
+    <ul>
+        <li>Email: appointments@myeb.com</li>
+        <li>Phone: 123-456-7890</li>
+    </ul>
+    <p>Our team is available to assist you with scheduling and answering any questions you may have.</p>
+</section>
+
+<section id="extra">
+    <h2>Extra Information</h2>
+    <p>Here you can find additional resources and information to support you in caring for your infant:</p>
+    <ul>
+        <li><a href="#">Breastfeeding Guide</a></li>
+        <li><a href="#">Baby Sleep Tips</a></li>
+        <li><a href="#">Nutrition for Infants</a></li>
+        <!-- תוכל להוסיף קישורים נוספים כפי שתרצה -->
+    </ul>
+</section>
+
+<footer>
+    <p>&copy; 2024 MyEB - All rights reserved.</p>
+</footer>
+
+</body>
+</html>
