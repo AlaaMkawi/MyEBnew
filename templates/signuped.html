@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <style>
+        /* סגנון עבור הטקסט "כבר יש לך חשבון?" */
+        p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px; /* הוספת מרווח בין הטקסט לטופס */
+        }
+
+        /* סגנון עבור הפורמט הכללי של הפורם */
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px; /* הוספת מרווח בין הטופס לקישור */
+        }
+
+        /* סגנון עבור התוויות של השדות */
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* סגנון עבור השדות עצמם */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* סגנון עבור כפתור השליחה */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* סגנון עבור כפתור השליחה כאשר עוברים עליו */
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* סגנון עבור הקישור */
+        a {
+            color: #007bff; /* צבע קישור */
+            text-decoration: none; /* להסיר קו תחתון מהקישור */
+        }
+
+        /* סגנון עבור הקישור כאשר נעביר עליו את העכבר */
+        a:hover {
+            text-decoration: underline; /* להוסיף קו תחתון לקישור */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Sign Up Peidetrician</h1>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    
+    <label for="password1">Password:</label>
+    <input type="password" id="password1" name="password1" required>
+    
+    <label for="password2">Confirm Password:</label>
+    <input type="password" id="password2" name="password2" required>
+    
+    <input type="submit" value="Create User">
+</form>
+
+<p>Already have an account? <a href="{% url 'loginpediatrician' %}">Log in here</a>.
+</p>
+
+
+</body>
+</html>
