@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule for Meetings</title>
+    <style>
+        body {
+            background-color: white; /* צבע רקע */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #000000; /* צבע טקסט */
+        }
+
+        header {
+            background-color:  #D4A29C; /* צבע רקע */
+            padding: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            color: #FFFFFF; /* צבע טקסט */
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        section {
+            padding: 20px;
+            margin: 10px;
+            background-color: #FFF;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #D4A29C; /* צבע רקע */
+            color: #FFFFFF; /* צבע טקסט */
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="date"], input[type="time"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color:  #D4A29C; /* צבע רקע */
+            color: #FFFFFF; /* צבע טקסט */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: calc(100% - 22px);
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color:  #D4A29C; /* צבע רקע */
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            color: #FFFFFF; /* צבע טקסט */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Schedule for Meetings</h1>
+        <nav>
+            <ul>
+                <!-- Additional links to other pages can be added here -->
+            </ul>
+        </nav>
+    </header>
+
+    <section id="workshop-schedule">
+    <h2>Schedule</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Workshop Name</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Python loop for workshops in Django -->
+            {% for workshop in workshops %}
+                <tr>
+                    <td>{{ workshop.name }}</td>
+                    <td>{{ workshop.date }}</td>
+                    <td>{{ workshop.time }}</td>
+                    <td>{{ workshop.location }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <form action="{% url 'addworkshopform' %}" method="post">
+         {% csrf_token %}
+        <label for="workshop_name">Workshop Name:</label>
+        <input type="text" id="workshop_name" name="workshop_name"><br><br>
+        <label for="workshop_date">Date:</label>
+        <input type="date" id="workshop_date" name="workshop_date" placeholder="Date"><br><br>
+        <label for="workshop_time">Hour:</label>
+        <input type="time" id="workshop_time" name="workshop_time"><br><br>
+        <label for="workshop_location">Location:</label>
+        <input type="text" id="workshop_location" name="workshop_location"><br><br>
+        <input type="submit" value="Add Workshop">
+    </form>
+</section>
+</body>
+</html>

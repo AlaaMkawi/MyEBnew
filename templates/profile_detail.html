@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Profile Detail</title>
+</head>
+<body>
+    <h1>Parent Profile Detail</h1>
+    <ul>
+        {% for profile in profiles %}
+        <li>
+            <strong>Parent Name:</strong> {{ profile.parent_name }}<br>
+            <strong>Parent Email:</strong> {{ profile.parent_email }}<br>
+            <strong>Parent Phone:</strong> {{ profile.parent_phone }}<br>
+            <strong>Child Name:</strong> {{ profile.child_name }}<br>
+            <strong>Child Age:</strong> {{ profile.child_age }}<br>
+            <strong>Child Gender:</strong> {{ profile.child_gender }}<br>
+            <strong>Challenges:</strong> {{ profile.challenges }}<br>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
