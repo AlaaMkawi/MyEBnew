@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Data in Baby Health</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://i.pinimg.com/474x/42/1c/b6/421cb6a31da74b35653a98125e5d882c.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-color: #f5f5f5; /* משנה את צבע הרקע לצבע המתאים */
+            color: #333;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.8); /* רקע לבנה חלקית עם שקיפות */
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.8); /* רקע לבנה חלקית עם שקיפות */
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.8); /* רקע לבנה חלקית עם שקיפות */
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #D4A29C;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #D4A29C
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Chat with Pyschologist and Pedtrician</h1>
+        <p>Here doctors  and pyschologist and parents can talk about thier baby health and challenges they faced in thus jounery in the website.</p>
+    </header>
+
+    <section>
+        <h2>Add New Data</h2>
+        <form action="{% url 'add_data' %}" method="post">
+            {% csrf_token %}
+            <!-- Add fields here that you want doctors to fill -->
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    <section>
+        <h2>View and Edit Existing Data</h2>
+        <!-- Display existing data and option to edit -->
+        <ul>
+            {% for data in data_list %}
+                <li>{{ data.name }}: {{ data.description }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <footer>
+        <p>Here you can add information about the site, relevant links, and more.</p>
+    </footer>
+</body>
+</html>

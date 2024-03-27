@@ -7,7 +7,7 @@ from account import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('loginpsycholist/', views.loginpsycholist, name='loginpsycholist'),
+
     path('psychomepage/', views.psychomepage, name='psychomepage'),
     path('homepage/', views.homepage, name='homepage'),
 
@@ -43,7 +43,13 @@ urlpatterns = [
     path('parent-comments/', views.parent_comment, name='parent_comments'),
     path('submit_comment/', views.submit_comment, name='submit_comment'),
     path('add_comment/', views.add_comment, name='add_comment'),
-     path('comment_success/', views.comment_success, name='comment_success'),
+    path('comment_success/', views.comment_success, name='comment_success'),
+    path('homepagefordoctors/', views.homepagefordoctors, name='homepagefordoctors'),
+    path('add_data/', views.add_data, name='add_data'),
+    path('view_data/', views.view_data, name='view_data'),
+    path('loginpediatrician/', views.loginpediatrician, name='loginpediatrician'),
+    path('loginpsychologist/', views.loginpsychologist, name='loginpsychologist'),
+
 
 
 

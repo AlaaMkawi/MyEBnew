@@ -12,14 +12,18 @@ from .models import ParentProfile
 from .forms import ParentProfileForm
 from .forms import FeedbackForm
 from .models import Comment
+from django.http import HttpResponseBadRequest
 from .forms import CommentForm  # אם יש לך טופס ספציפי לכך
 from django.http import JsonResponse
 from .forms import SummaryForm
 from .forms import PsychologistCommentForm
 from .models import PsychologistComment
 
+from .models import BabyHealth
+from .forms import BabyHealthForm
 
-def loginpsycholist(request):
+
+def loginpsychologist(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -69,7 +73,7 @@ def loginpediatrician(request):
             users_in_group = Group.objects.get(name='pediatrician').user_set.all()
             if user in users_in_group:
                 login(request, user)
-                return redirect('pedhomepage')
+                return redirect('homepagefordoctors')
             else:
                 messages.info(request, 'Username or password incorrect')
         else:
@@ -130,7 +134,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account was created for {username}')
-            return redirect('parhomepage')
+            return redirect('homepageforparents')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
@@ -156,10 +160,10 @@ def signuped(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account was created for {username}')
-            return redirect('pedhomepage')
+            return redirect('homepagefordoctors')
     else:
         form = UserCreationForm()
-    return render(request, 'signupys.html', {'form': form})
+    return render(request, 'signuped.html', {'form': form})
 
 
 def add_workshop(request):
@@ -248,7 +252,7 @@ def submit_profile(request):
         return HttpResponse("Profile submitted successfully!")
 
     else:
-        return render(request, 'error.html')
+        return HttpResponseBadRequest("Bad request")
 """def submit_profile(request):
      return render(request, 'submit_profile.html')"""
 
@@ -349,3 +353,22 @@ def comment_success(request):
     return render(request, 'comment_success.html')
 def add_comment(request):
     return render(request, 'add_comment.html')
+
+def homepagefordoctors(request):
+    return render(request, 'homepagefordoctors.html')
+
+
+
+def add_data(request):
+    if request.method == 'POST':
+        form = BabyHealthForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_data')
+    else:
+        form = BabyHealthForm()
+    return render(request, 'add_data.html', {'form': form})
+
+def view_data(request):
+    data_list = BabyHealth.objects.all()
+    return render(request, 'view_data.html', {'data_list': data_list})

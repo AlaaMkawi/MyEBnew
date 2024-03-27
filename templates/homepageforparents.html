@@ -34,13 +34,33 @@
             margin-right: 20px;
         }
 
-        section {
-            padding: 50px 20px;
-            text-align: center;
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
 
-        h2 {
-            margin-bottom: 20px;
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         footer {
@@ -56,16 +76,22 @@
 </head>
 <body>
     <header>
-        <h1>New Parent Psychologist</h1>
+        <h1> MyEB </h1>
         <nav>
             <ul>
-                <li><a href="{% url 'aboutus' %}">About Us</a></li>
-                <li><a href="{% url 'contact_pys' %}">Contact Psychologist</a></li>
-                <li><a href="{% url 'contact_doctor' %}">Contact Doctor</a></li>
+               
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Contact</a>
+                    <div class="dropdown-content">
+                        <a href="{% url 'contact_pys' %}">Contact Psychologist</a>
+                        <a href="{% url 'contact_doctor' %}">Contact Doctor</a>
+                    </div>
+                </li>
                 <li><a href="{% url 'meeting' %}">Meeting Details</a></li>
                 <li><a href="{% url 'feedback' %}">Feedback</a></li>
                 <li><a href="{% url 'articls' %}">Articles</a></li>
                 <li><a href="{% url 'parent_comments' %}">Parent Comment</a></li>
+                <li><a href="{% url 'add_data' %}">Q&A</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </nav>
@@ -76,3 +102,8 @@
     </footer>
 </body>
 </html>
+
+
+
+
+

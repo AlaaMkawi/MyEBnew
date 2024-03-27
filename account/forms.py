@@ -7,6 +7,8 @@ from .models import Feedback
 from .models import Parent
 from .models import Comment
 from .models import WorkshopSummary
+from django import forms
+from .models import BabyHealth
 class CreatUserForm(UserCreationForm):
     class Meta:
         model = User
@@ -60,3 +62,9 @@ class PsychologistCommentForm(forms.ModelForm):
         model = PsychologistComment
         fields = ['psychologist_name', 'comment']
 
+
+
+class BabyHealthForm(forms.ModelForm):
+    class Meta:
+        model = BabyHealth
+        fields = ['name', 'description']

@@ -49,8 +49,7 @@
             text-align: center;
             padding: 20px;
         }
-     /* Dropdown container */
-.dropdown {
+        .dropdown {
     position: relative;
     display: inline-block;
     float: left; /* Align the dropdown to the right */
@@ -100,16 +99,15 @@
     background-color: #D4A29C;
 }
 
-
     </style>
 </head>
 <body>
-  <header>
-    <h1>New Parent Psychologist</h1>
+    <header>
+    <h1>New Parent Peditrician </h1>
     <nav class="dropdown">
         <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
         <div id="myDropdown" class="dropdown-content">
-           
+            
             <a href="{% url 'Workshopys' %}">Workshop Summaries</a>
             <a href="{% url 'schedulepys' %}">Workshop Schedule</a>
             <a href="{% url 'parentprofile' %}">Parent Profile</a>
@@ -120,13 +118,9 @@
     </nav>
 </header>
 
-
     
     <footer>
         <p>All rights reserved &copy; 2024</p>
     </footer>
 </body>
 </html>
-
-
-
