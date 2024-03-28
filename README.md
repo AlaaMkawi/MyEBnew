@@ -9,19 +9,29 @@ of early parenthood.
 Getting Started
 -----------------------------------------------------------------------------------------------------------------------------
 These instructions will guide you through setting up the project on your local machine for development and testing purposes.
+
 Prerequisites
+
 To install and run the software, you will need:
 
 Python
-Django
-HTML
-CSS
-Installing
-Follow these steps to set up your development environment:
 
+Django
+
+HTML
+
+CSS
+
+Installing
+
+Follow these steps to set up your development environment:
+----------------------------------------------------------
 1.Install Python on your machine.
+
 2.Install Django using pip: pip install django.
+
 3.Clone the project repository from GitHub.
+
 4.Navigate to the project directory and install the required 
 dependencies using pip: pip install -r requirements.txt.
 
