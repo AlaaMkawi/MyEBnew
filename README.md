@@ -1,5 +1,5 @@
 Project Title: MyEB
-
+----------------------------------------------------------------------------------------------------------------------------------
 MyEB is designed to assist new parents in caring for their children up to the age of one, focusing on their health and well-being.
 
 The portal provides access to medical professionals and psychologists who offer guidance and support for navigating the challenges
@@ -7,6 +7,7 @@ The portal provides access to medical professionals and psychologists who offer 
 of early parenthood.
 
 Getting Started
+-----------------------------------------------------------------------------------------------------------------------------
 These instructions will guide you through setting up the project on your local machine for development and testing purposes.
 Prerequisites
 To install and run the software, you will need:
