@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Reset and general styling */
         * {
@@ -19,58 +20,61 @@
         }
 
         header {
-            background-color: #D4A29C;
+            background-color: #7aabb2;
             color: #fff;
             padding: 20px;
             text-align: center;
         }
 
-        nav ul {
-            list-style-type: none;
+        main {
+            display: flex;
+            flex-wrap: wrap; /* Allow sections to wrap */
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 160px); /* Adjust as needed based on header and footer height */
         }
 
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
+        .section {
+            flex: 0 0 calc(25% - 40px); /* Each section takes up 25% of the container width with margin */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
         }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
+        /* New section styling */
+        .floating-section {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
         footer {
-            background-color: #D4A29C;
+            background-color: #7aabb2;
             color: #fff;
             text-align: center;
             padding: 20px;
             position: fixed;
             bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
+        }
+
+        /* Adjustments for smaller screens */
+        @media screen and (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+            .section {
+                flex: 0 0 calc(50% - 40px); /* On smaller screens, each section takes up 50% */
+            }
         }
     </style>
 </head>
@@ -78,32 +82,74 @@
     <header>
         <h1> MyEB </h1>
         <nav>
-            <ul>
-               
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Contact</a>
-                    <div class="dropdown-content">
-                        <a href="{% url 'contact_pys' %}">Contact Psychologist</a>
-                        <a href="{% url 'contact_doctor' %}">Contact Doctor</a>
-                    </div>
-                </li>
-                <li><a href="{% url 'meeting' %}">Meeting Details</a></li>
-                <li><a href="{% url 'feedback' %}">Feedback</a></li>
-                <li><a href="{% url 'articls' %}">Articles</a></li>
-                <li><a href="{% url 'parent_comments' %}">Parent Comment</a></li>
-                <li><a href="{% url 'add_data' %}">Q&A</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>
+            <!-- Navigation content -->
         </nav>
     </header>
+
+    <main>
+        <div class="section">
+            <!-- Content for the first section -->
+            <h2>Contact-Pys</h2>
+            <p></p>
+            <a href="{% url 'contact_pys' %}">Go to Contact Psychologist</a>
+        </div>
+
+        <div class="section">
+            <!-- Content for the second section -->
+            <h2>Metteing Details</h2>
+            <p></p>
+            <a href="{% url 'meeting' %}">Go to Meeting Details</a>
+        </div>
+
+        <div class="section">
+            <!-- Content for the third section -->
+            <h2>Articls</h2>
+            <p></p>
+            <a href="{% url 'articls' %}">Go to Articls</a>
+        </div>
+
+        <div class="section">
+            <!-- Content for the fourth section -->
+            <h2>Comment</h2>
+            <p></p>
+            <a href="{% url 'parent_comments' %}">Go to Comment section</a>
+        </div>
+
+        <div class="section">
+            <!-- Content for the fifth section -->
+            <h2>Contact-Ped</h2>
+            <p></p>
+            <a href="{% url 'contact_doctor' %}">Go to Contact pys</a>
+        </div>
+
+        <div class="section">
+            <!-- Content for the sixth section -->
+            <h2>Chat</h2>
+            <p></p>
+            <a href="{% url 'add_data' %}">Go to Chat</a>
+        </div>
+
+        <div class="section">
+            <!-- Content for the seventh section -->
+            <h2>Logout</h2>
+            <p></p>
+            <a href="{% url 'logout' %}">Go to Logout</a>
+        </div>
+
+        <div class="section">
+            <!-- Content for the eighth section -->
+            <h2>feedback</h2>
+            <p></p>
+            <a href="{% url 'feedback' %}">Go to FeedBack</a>
+        </div>
+    </main>
+
+    <!-- Floating section -->
+    
 
     <footer>
         <p>All rights reserved &copy; 2024</p>
     </footer>
 </body>
 </html>
-
-
-
-
 

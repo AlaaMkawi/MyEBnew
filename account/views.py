@@ -372,3 +372,7 @@ def add_data(request):
 def view_data(request):
     data_list = BabyHealth.objects.all()
     return render(request, 'view_data.html', {'data_list': data_list})
+
+
+def patinfo(request):
+    return render(request, 'patinfo.html')

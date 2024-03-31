@@ -38,7 +38,7 @@
             width: 100%;
             padding: 10px;
             border: none;
-            background-color: #BC8F8FFF;
+            background-color: #7aabb2;
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
@@ -46,7 +46,7 @@
         }
 
         button:hover {
-            background-color: #BC8F8F;
+            background-color: #7aabb2;
         }
         
         .error-message {
@@ -67,6 +67,11 @@
         <input type="text" value="" placeholder="Username" name="username" id="username" />
         <input type="password" value="" placeholder="Password" name="password" id="password" />
         <button>Log in</button>
+
+
+    <div class="d-flex justify-content-center links">
+        Forget Password?<a href="{% url 'reset_password' %}"
+         class="m1-2">Reset password</a>
     </form>
 </body>
 </html>
