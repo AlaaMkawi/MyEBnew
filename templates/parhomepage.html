@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+    {% include 'navpar.html' %}
     <div class="container">
         <h1>Welcome again, Parent!</h1>
         <p>We're glad to have you here.</p>
@@ -19,24 +21,30 @@
     background-color: #ffffff;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    }
+    
+    .container {
+        text-align: center;
+    }
+    
+    h1 {
+        color: #050505;
+        font-size: 36px;
+        margin-bottom: 20px;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        display: flex;
 
-.container {
-    text-align: center;
-}
+    }
+    
+    p {
+        color: #BC8F8FFF;
+        font-size: 18px;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        display: flex;
 
-h1 {
-    color: #050505;
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-p {
-    color: #BC8F8FFF;
-    font-size: 18px;
-}
+    }
 </style>

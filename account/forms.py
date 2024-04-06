@@ -3,7 +3,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import *
+from .models import Feedback
 from .models import Parent
+from .models import Comment
+from .models import WorkshopSummary
+from django import forms
+from .models import BabyHealth
+from .models import InformationBoard
 
 class CreatUserForm(UserCreationForm):
     class Meta:
@@ -15,3 +21,52 @@ class ParentSignupForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+
+from .models import ParentProfile
+
+class ParentProfileForm(forms.ModelForm):
+    class Meta:
+        model = ParentProfile
+        fields = '__all__'
+
+
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['text']
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment_text']
+        widgets = {
+            'comment_text': forms.Textarea(attrs={'rows': 5, 'placeholder': 'Write your comment here...'})
+        }
+
+
+
+
+class SummaryForm(forms.ModelForm):
+    class Meta:
+        model = WorkshopSummary
+        fields = ['psychologist_name', 'workshop_date', 'summary_text']
+from .models import PsychologistComment
+
+class PsychologistCommentForm(forms.ModelForm):
+    class Meta:
+        model = PsychologistComment
+        fields = ['psychologist_name', 'comment']
+
+
+
+class BabyHealthForm(forms.ModelForm):
+    class Meta:
+        model = BabyHealth
+        fields = ['name', 'description']
+
+class InformationBoardForm(forms.ModelForm):
+    class Meta:
+        model = InformationBoard
+        fields = ['title', 'content']

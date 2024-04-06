@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+         nav {
+           position: fixed;
+           top: 0; /* Position at the top */
+           background: #538d9a;
+           width: 100%;
+           padding: 7px 0;
+           z-index: 10; /* Ensure it's above other content */
+           display: flex; /* Add flex display */
+            justify-content: center; /* Horizontally center items */
+            align-items: center; /* Vertically center items */
+             
+        }
+
+        nav ul {
+            display: inline;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        nav ul li {
+            list-style: none;
+            margin: 0px;
+        }
+         
+       
+        nav ul li a {
+            text-decoration: none;
+            color: #538d9a;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background: #538d9a;
+            color: #ffffff;
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+        }
+        
+        .feedback-container {
+            margin-top: 80px;
+            padding-top: 20px; /* Adjust if necessary */
+        }
+        h1, h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: calc(100% - 50px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            width: 95%;
+            padding: 10px;
+            background-color: #538d9a;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #538d9a;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 80%;
+            max-width: 500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li button {
+            background-color: #dc3545;
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .feedback-text {
+            flex: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'parhomepage' %}">home</a></li>
+        </ul>
+    </nav>
+    
+    <div class="feedback-container"> 
+        <h1>Feedback</h1>
+        <form id="feedbackForm" mothed ="post" action="{% url 'feedback_submit' %}">
+            {% csrf_token %}
+            <input type="text" id="feedbackText" placeholder="Enter your feedback">
+            <button type="submit">Submit Feedback</button>
+        </form>
+        
+        <h2>Previous Feedbacks:</h2>
+        <ul id="feedbackList">
+            <!-- Feedback items will be dynamically added here -->
+        </ul>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load feedback from local storage when the page loads
+            loadFeedback();
+
+            // Add event listener for form submission
+            document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                submitFeedback();
+            });
+        });
+
+        function submitFeedback() {
+            // Get the feedback text from the input field
+            const feedbackText = document.getElementById('feedbackText').value;
+
+            if (feedbackText.trim() === '') {
+                alert('Please enter your feedback');
+                return;
+            }
+
+            // Create a new list item to display the feedback
+            const listItem = document.createElement('li');
+            listItem.textContent = feedbackText;
+
+            // Create a delete button for the feedback
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '';
+            deleteButton.addEventListener('click', function() {
+                listItem.remove(); // Remove the feedback item when delete button is clicked
+                saveFeedback(); // Save feedback to local storage after deletion
+            });
+            listItem.appendChild(deleteButton); // Append the delete button to the feedback item
+
+            // Append the new feedback item to the feedback list
+            document.getElementById('feedbackList').appendChild(listItem);
+
+            // Save feedback to local storage
+            saveFeedback();
+
+            // Clear the input field after submission
+            document.getElementById('feedbackText').value = '';
+        }
+
+        function saveFeedback() {
+            // Get feedback items
+            const feedbackItems = document.querySelectorAll('#feedbackList li');
+
+            // Create an array to store feedback text
+            const feedbackTexts = [];
+            feedbackItems.forEach(function(item) {
+                feedbackTexts.push(item.textContent);
+            });
+
+            // Store feedback data in local storage
+            localStorage.setItem('feedback', JSON.stringify(feedbackTexts));
+        }
+
+        function loadFeedback() {
+            // Retrieve feedback data from local storage
+            const feedbackData = localStorage.getItem('feedback');
+            if (feedbackData) {
+                // Parse JSON data
+                const feedbackTexts = JSON.parse(feedbackData);
+                // Create feedback items and add to the feedback list
+                feedbackTexts.forEach(function(text) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = text;
+
+                    // Create a delete button for the feedback
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = '';
+                    deleteButton.addEventListener('click', function() {
+                        listItem.remove(); // Remove the feedback item when delete button is clicked
+                        saveFeedback(); // Save feedback to local storage after deletion
+                    });
+                    listItem.appendChild(deleteButton); // Append the delete button to the feedback item
+
+                    // Append the new feedback item to the feedback list
+                    document.getElementById('feedbackList').appendChild(listItem);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

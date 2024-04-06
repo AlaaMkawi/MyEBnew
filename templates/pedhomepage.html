@@ -1,43 +1,179 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome Page</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Website Layout | Welcome :)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons CSS (Optional) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Poppins', sans-serif;
+}
+
+::selection {
+color: #fff;
+background: #538d9a;
+}
+
+nav {
+position: fixed;
+background: #ffffff;
+width: 100%;
+padding: 10px 0;
+z-index: 12;
+}
+
+nav .menu {
+max-width: 1250px;
+margin: auto;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 20px;
+}
+
+.menu .logo a {
+text-decoration: none;
+color: #538d9a;
+font-size: 35px;
+font-weight: 600;
+}
+
+.menu ul {
+display: inline-flex;
+}
+
+.menu ul li {
+list-style: none;
+margin-left: 7px;
+}
+
+.menu ul li:first-child {
+margin-left: 0px;
+}
+
+.menu ul li a {
+text-decoration: none;
+color: #7aabb2;
+font-size: 18px;
+font-weight: 500;
+padding: 8px 15px;
+border-radius: 5px;
+transition: all 0.3s ease;
+}
+
+.menu ul li a:hover {
+background: #7aabb2;
+color: #ffffff;
+}
+
+.img {
+/*background: url('img3.jpg')no-repeat;*/
+width: 50%;
+height: 50vh;
+background-size: cover;
+background-position: center;
+position: relative;
+}
+
+.img::before {
+content: '';
+position: absolute;
+height: 20%;
+width: 20%;
+background: rgb(83, 141, 154);
+}
+
+/* Styles for clickable squares */
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 70px; /* Adjusted margin-top to create space between navbar and squares */
+}
+
+.square {
+position: relative;
+width: 250px; /* Increased width */
+height: 250px; /* Increased height */
+background-color: #7aabb2; /* Square background color */
+margin: 40px; /* Increased space between squares */
+text-align: center;
+line-height: 250px;
+font-size: 24px;
+color: white; /* Text color */
+cursor: pointer;
+transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.square:hover {
+background-color: #538d9a; /* Hover color */
+}
+
+.square::after {
+content: attr(data-text); /* Display the word on hover */
+position: absolute;
+top: 70%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 18px;
+color: white;
+opacity: 0; /* Initially hidden */
+transition: opacity 0.3s ease;
+}
+
+.square:hover::after {
+opacity: 1; /* Show the word on hover */
+}
+
+
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome again, Pediatrician!</h1>
-        <p>We're glad to have you here.</p>
-    </div>
+<nav>
+<div class="menu">
+<div class="logo">
+<a href="#">Pediatrician :)</a>
+</div>
+<ul>
+<li><a href="#">comments</a></li>
+<li><a href="#">more</a></li>
+
+</ul>
+</div>
+</nav>
+<div class="img"></div>
+
+<div class="container">
+<a href="{% url 'porall' %}" class="square" data-text="Workshops">
+
+<i class="bi bi-person-video3" style="font-size: 70px;"></i>
+
+</a>
+<a href="" class="square" data-text="Extra Info">
+
+<i class="bi bi-journal-text" style="font-size: 70px;"></i>
+</a>
+<a href="{% url 'pedinfoboard' %}" class="square" data-text="Info Board">
+
+<i class="bi bi-layout-text-window-reverse" style="font-size: 66px;" ></i>
+</a>
+<a href="" class="square" data-text="Patients">
+
+<i class="bi bi-clipboard-pulse" style="font-size: 70px;"></i>
+
+</a>
+</div>
 </body>
 </html>
-<style>
-    
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
-    text-align: center;
-}
-
-h1 {
-    color: #050505;
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-p {
-    color: #BC8F8FFF;
-    font-size: 18px;
-}
-</style>
