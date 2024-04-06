@@ -20,6 +20,8 @@ Django
 
 HTML
 
+JavaScript
+
 CSS
 
 Installing
@@ -58,6 +60,8 @@ HTML - For structuring the web pages.
 
 CSS - For styling the web pages.
 
+JavaScript - Enables interactivity, dynamic behavior, and data manipulation, facilitating both frontend user interactions and backend data management.
+
 Contributing
 ------------
 Please refer to the CONTRIBUTING.md file for details on contributing to this project.
@@ -71,7 +75,7 @@ Lena abu abid
 
 Alaa Mkawi
 
-Shahed Alnsasra
+Shahd Alnsasra
 
 Acknowledgments:
 --------------------------
