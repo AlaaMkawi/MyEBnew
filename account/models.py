@@ -38,6 +38,9 @@ class InformationBoard(models.Model):
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.content
+
 class ExtraInfo(models.Model):
     title = models.CharField(max_length=300)
     content = models.TextField()
@@ -68,21 +71,12 @@ class ParentProfile(models.Model):
 from django.db import models
 
 class Feedback(models.Model):
-    RATING_CHOICES = [
-        (1, '★☆☆☆☆'),
-        (2, '★★☆☆☆'),
-        (3, '★★★☆☆'),
-        (4, '★★★★☆'),
-        (5, '★★★★★'),
-    ]
-
-    rating = models.IntegerField(choices=RATING_CHOICES)
-    comments = models.TextField()
-
+    text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Feedback - {self.created_at}"
+        return self.text
+
 
 class Comment(models.Model):
     comment_text = models.TextField()  # תיבת טקסט לכתיבת התגובה
@@ -125,3 +119,11 @@ class BabyHealth(models.Model):
 
     def __str__(self):
         return self.name
+
+class PediatricianInfoBoard(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.content

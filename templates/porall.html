@@ -100,7 +100,7 @@ background: rgb(83, 141, 154);
 display: flex;
 justify-content: center;
 align-items: center;
-margin-top: 70px; /* Adjusted margin-top to create space between navbar and squares */
+margin-top: 30px; /* Adjusted margin-top to create space between navbar and squares */
 }
 
 .square {
@@ -111,7 +111,7 @@ background-color: #7aabb2; /* Square background color */
 margin: 40px; /* Increased space between squares */
 text-align: center;
 line-height: 250px;
-font-size: 24px;
+font-size: 15px;
 color: white; /* Text color */
 cursor: pointer;
 transition: background-color 0.3s ease; /* Smooth transition */
@@ -120,7 +120,6 @@ transition: background-color 0.3s ease; /* Smooth transition */
 .square:hover {
 background-color: #538d9a; /* Hover color */
 }
-
 .square::after {
 content: attr(data-text); /* Display the word on hover */
 position: absolute;
@@ -144,35 +143,25 @@ opacity: 1; /* Show the word on hover */
 <nav>
 <div class="menu">
 <div class="logo">
-<a href="#">Pediatrician :)</a>
+<a href="#">Psychologist :)</a>
 </div>
 <ul>
+<li><a href="{% url 'pedhomepage' %}">Home</a></li>
 <li><a href="#">comments</a></li>
 <li><a href="#">more</a></li>
-
 </ul>
 </div>
 </nav>
 <div class="img"></div>
 
 <div class="container">
-<a href="{% url 'porall' %}" class="square" data-text="Workshops">
+<a href=" {% url 'mwped' %}" class="square" data-text="monthly_workshops">
 
-<i class="bi bi-person-video3" style="font-size: 70px;"></i>
-
+<i class="bi bi-calendar2-heart" style="font-size: 70px;"></i>
 </a>
-<a href="" class="square" data-text="Extra Info">
+<a href=" {% url 'meetped' %}" class="square" data-text="Private_meetings">
 
-<i class="bi bi-journal-text" style="font-size: 70px;"></i>
-</a>
-<a href="{% url 'pedinfoboard' %}" class="square" data-text="Info Board">
-
-<i class="bi bi-layout-text-window-reverse" style="font-size: 66px;" ></i>
-</a>
-<a href="" class="square" data-text="Patients">
-
-<i class="bi bi-clipboard-pulse" style="font-size: 70px;"></i>
-
+<i class="bi bi-clipboard2-heart" style="font-size: 70px;"></i>
 </a>
 </div>
 </body>

@@ -386,3 +386,164 @@ class SubmitCommentTestCase(TestCase):
         self.assertContains(response, '</form>')
         self.assertIsInstance(response.context['comment_form'], CommentForm)  # בדיקה שהטופס במשתנה ההקשר
 
+from .models import Feedback
+from .forms import FeedbackForm
+from .views import feedbackl
+class FeedbackViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_feedback_view_template(self):
+        request = self.factory.get(reverse('feedbackl'))
+        response = feedbackl(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'feedbackl.html')
+
+    def test_feedback_view_GET(self):
+        request = self.factory.get(reverse('feedbackl'))
+        response = feedbackl(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(response.context['form'], FeedbackForm)
+
+    def test_feedback_view_POST_valid_form(self):
+        request = self.factory.post(reverse('feedbackl'), data={'your_form_data_here'})
+        response = feedbackl(request)
+        self.assertEqual(response.status_code, 302)  # Expecting a redirect
+        self.assertRedirects(response, reverse('feedbackl'))  # Redirecting back to the feedback page
+
+        # Check if the form data is saved
+        self.assertEqual(Feedback.objects.count(), 1)
+        saved_feedback = Feedback.objects.first()
+        self.assertEqual(saved_feedback.your_field_name_here, 'expected_value')
+from .models import InformationBoard
+from .views import psyinfoboard
+
+class PsyInfoBoardViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_psyinfoboard_POST(self):
+        request = self.factory.post(reverse('psyinfoboard'), data={'content': 'Test content'})
+        response = psyinfoboard(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('item_id', response.json())  # Check if the response contains 'item_id'
+
+        # Check if an item is created in the database
+        self.assertEqual(InformationBoard.objects.count(), 1)
+        item = InformationBoard.objects.first()
+        self.assertEqual(item.content, 'Test content')
+
+    def test_psyinfoboard_GET(self):
+        # Create sample items in the database
+        InformationBoard.objects.create(content='Item 1')
+        InformationBoard.objects.create(content='Item 2')
+
+        request = self.factory.get(reverse('psyinfoboard'))
+        response = psyinfoboard(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'psyinfoboard.html')
+
+        # Check if existing items are passed to the template
+        self.assertEqual(len(response.context['items']), 2)
+        self.assertEqual(response.context['items'][0].content, 'Item 1')
+        self.assertEqual(response.context['items'][1].content, 'Item 2')
+
+from .views import delete_item, get_information
+
+class DeleteItemViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_delete_item_POST(self):
+        # Create a sample item in the database
+        item = InformationBoard.objects.create(content='Test content')
+
+        request = self.factory.post(reverse('delete_item', args=[item.id]))
+        response = delete_item(request, item_id=item.id)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {'success': True})
+
+        # Check if the item is deleted from the database
+        self.assertFalse(InformationBoard.objects.filter(id=item.id).exists())
+
+class GetInformationViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_get_information(self):
+        # Create sample items in the database
+        InformationBoard.objects.create(content='Item 1')
+        InformationBoard.objects.create(content='Item 2')
+
+        request = self.factory.get(reverse('get_information'))
+        response = get_information(request)
+        self.assertEqual(response.status_code, 200)
+
+        # Check if the returned JSON contains the correct information items
+        expected_data = [{'content': 'Item 1'}, {'content': 'Item 2'}]
+        self.assertListEqual(response.json(), expected_data)
+from .models import PediatricianInfoBoard
+from .views import pedinfoboard, delete_ped_item, get_ped_information
+
+class PedInfoBoardViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_pedinfoboard_POST(self):
+        request = self.factory.post(reverse('pedinfoboard'), data={'content': 'Test content'})
+        response = pedinfoboard(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('item_id', response.json())  # Check if the response contains 'item_id'
+
+        # Check if an item is created in the database
+        self.assertEqual(PediatricianInfoBoard.objects.count(), 1)
+        item = PediatricianInfoBoard.objects.first()
+        self.assertEqual(item.content, 'Test content')
+
+    def test_pedinfoboard_GET(self):
+        # Create sample items in the database
+        PediatricianInfoBoard.objects.create(content='Item 1')
+        PediatricianInfoBoard.objects.create(content='Item 2')
+
+        request = self.factory.get(reverse('pedinfoboard'))
+        response = pedinfoboard(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'pedinfoboard.html')
+
+        # Check if existing items are passed to the template
+        self.assertEqual(len(response.context['items']), 2)
+        self.assertEqual(response.context['items'][0].content, 'Item 1')
+        self.assertEqual(response.context['items'][1].content, 'Item 2')
+
+class DeletePedItemViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_delete_ped_item_POST(self):
+        # Create a sample item in the database
+        item = PediatricianInfoBoard.objects.create(content='Test content')
+
+        request = self.factory.post(reverse('delete_ped_item', args=[item.id]))
+        response = delete_ped_item(request, item_id=item.id)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {'success': True})
+
+        # Check if the item is deleted from the database
+        self.assertFalse(PediatricianInfoBoard.objects.filter(id=item.id).exists())
+
+class GetPedInformationViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_get_ped_information(self):
+        # Create sample items in the database
+        PediatricianInfoBoard.objects.create(content='Item 1')
+        PediatricianInfoBoard.objects.create(content='Item 2')
+
+        request = self.factory.get(reverse('get_ped_information'))
+        response = get_ped_information(request)
+        self.assertEqual(response.status_code, 200)
+
+        # Check if the returned JSON contains the correct information items
+        expected_data = [{'content': 'Item 1'}, {'content': 'Item 2'}]
+        self.assertListEqual(response.json(), expected_data)

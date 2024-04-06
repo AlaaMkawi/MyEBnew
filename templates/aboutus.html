@@ -12,37 +12,55 @@
         }
 
         header {
-            background-color:#D4A29C;
+            background-color: #538d9a;
             color: #FFFFFF;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
 
         nav {
-            background-color: #D4A29C;
-            color: #FFFFFF;
-            padding: 10px;
-            text-align: center;
+           position: fixed;
+           background: #538d9a;
+           width: 100%;
+           padding: 7px 0;
+           z-index: 10;
+           display: flex; /* Add flex display */
+            justify-content: center; /* Horizontally center items */
+            align-items: center; /* Vertically center items */
         }
 
         nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+            display: inline;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
         }
 
         nav ul li {
-            display: inline;
-            margin-right: 15px;
+            list-style: none;
+            margin: 0px;
         }
-
+         
+       
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background: #fff;
+            color: #538d9a;
+        }
         section {
             padding: 20px;
             margin: 20px;
         }
 
         footer {
-            background-color: #D4A29C;
+            background-color: #538d9a;
             color: #FFFFFF;
             padding: 10px;
             text-align: center;
@@ -60,16 +78,17 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="{% url 'Workshopys' %}">Workshop Summaries</a></li>
-            <li><a href="{% url 'schedulepys' %}">Workshop Schedule</a></li>
+            
         </ul>
     </nav>
 
     <section>
-        <h2>Who We Are</h2>
-        <p>Welcome to MyEB - Your trusted resource for assisting new parents in caring for their children up to the age of one.</p>
-        <p>At MyEB, we understand the challenges that come with parenting, especially during the first year. Our mission is to provide support, guidance, and resources to help parents navigate the early stages of their child's development with confidence.</p>
-        <p>Whether you have questions about infant care, feeding, sleep patterns, or developmental milestones, we're here to help. Our team of experts is dedicated to ensuring that parents have the knowledge and support they need to give their children the best start in life.</p>
+        <h2>Discover the Heart of MyEB: Where Parenthood Blossoms</h2>
+        <p>Embark on a journey with MyEB(make your experience better), your cherished haven crafted exclusively for new parents 
+            embarking on the enchanting adventure of nurturing their little ones through their precious first year.</p>
+        
+         <p>At MyEB, we intimately comprehend the whirlwind of emotions and trials that accompany parenthood, particularly in those tender initial months. Our profound purpose resonates in extending a compassionate hand, furnishing unwavering guidance, and curating a sanctuary brimming with invaluable resources to empower parents through this extraordinary chapter. </p>
+        <p> Dive into a sanctuary where queries about nurturing newborns, mastering feeding routines, deciphering sleep cycles, or celebrating every tiny milestone find their answers. With a dedicated troupe of seasoned experts, we pledge to stand by you, illuminating your path with the wisdom and reassurance you deserve to sculpt a radiant future for your little one.</p>
     </section>
 
     <footer>
