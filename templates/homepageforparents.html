@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        /* Reset and general styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        header {
+            background-color: #D4A29C;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        footer {
+            background-color: #D4A29C;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1> MyEB </h1>
+        <nav>
+            <ul>
+               
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Contact</a>
+                    <div class="dropdown-content">
+                        <a href="{% url 'contact_pys' %}">Contact Psychologist</a>
+                        <a href="{% url 'contact_doctor' %}">Contact Doctor</a>
+                    </div>
+                </li>
+                <li><a href="{% url 'meeting' %}">Meeting Details</a></li>
+                <li><a href="{% url 'feedback' %}">Feedback</a></li>
+                <li><a href="{% url 'articls' %}">Articles</a></li>
+                <li><a href="{% url 'parent_comments' %}">Parent Comment</a></li>
+                <li><a href="{% url 'add_data' %}">Q&A</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <footer>
+        <p>All rights reserved &copy; 2024</p>
+    </footer>
+</body>
+</html>
+
+
+
+
+
