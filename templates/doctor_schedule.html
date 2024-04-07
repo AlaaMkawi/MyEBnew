@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>קביעת פגישה עם הורה</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  label {
+    font-weight: bold;
+  }
+  input[type="datetime-local"],
+  input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  button {
+    background-color: #7aabb2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #7aabb2;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>קביעת פגישה עם הורה</h2>
+  <form id="appointmentForm">
+    <label for="datetime">תאריך ושעה:</label>
+    <input type="datetime-local" id="datetime" name="datetime" required>
+    <label for="zoomLink">קישור לפגישה בזום:</label>
+    <input type="url" id="zoomLink" name="zoomLink" required>
+    <button type="submit">שמור פגישה</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
+    // Gather form data
+    var datetime = document.getElementById("datetime").value;
+    var zoomLink = document.getElementById("zoomLink").value;
+    // Save appointment data to localStorage
+    localStorage.setItem("appointmentDatetime", datetime);
+    localStorage.setItem("appointmentZoomLink", zoomLink);
+    // Show success message
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "פגישה נקבעה בהצלחה",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  });
+</script>
+</body>
+</html>

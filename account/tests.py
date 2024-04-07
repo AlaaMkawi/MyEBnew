@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Group
-from django.http import response
-from django.test import TestCase
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.http import response, HttpResponseRedirect
+
 from django.test import Client
 
 from django.contrib.auth import login
@@ -386,3 +387,20 @@ class SubmitCommentTestCase(TestCase):
         self.assertContains(response, '</form>')
         self.assertIsInstance(response.context['comment_form'], CommentForm)  # בדיקה שהטופס במשתנה ההקשר
 
+
+from django.test import TestCase
+from django.test.client import Client
+from django.urls import reverse
+
+
+class FeedbackSubmitTestCase(TestCase):
+    def test_feedback_submit_view(self):
+        # יצירת לקוח דמי
+        client = Client()
+
+        # שליחת בקשת POST ל-View
+        response = client.post(reverse('feedback_submit'),
+                               {'your_name': 'Test User', 'message': 'This is a test message.'})
+
+        # אימות כי התשובה חייבת להיות קוד תגובה 302 (התחזרה לדף תודה)
+        self.assertEqual(response.status_code, 200)

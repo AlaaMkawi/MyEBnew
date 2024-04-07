@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parent Information</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  #parentInfoDisplay {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  #parentInfoDisplay div {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+  }
+  button {
+    background-color: #7aabb2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  button:hover {
+    background-color:#7aabb2;
+  }
+</style>
+</head>
+<body>
+<!-- כותרת -->
+<h1>Parent Information</h1>
+
+<!-- תצוגת מידע של ההורים -->
+<div id="parentInfoDisplay">
+  <!-- כאן יופיע המידע של כל ההורים -->
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // טעינת המידע של כל ההורים מהלוקל סטורז
+  var allParents = JSON.parse(localStorage.getItem('parents')) || [];
+  if (allParents.length > 0) {
+    displayAllParents(allParents);
+  } else {
+    document.getElementById('parentInfoDisplay').innerText = 'No parent information available.';
+  }
+});
+
+function displayAllParents(parents) {
+  var parentInfoDisplay = document.getElementById('parentInfoDisplay');
+  parentInfoDisplay.innerHTML = '';
+
+  parents.forEach(function(parent, index) {
+    var parentDiv = document.createElement('div');
+    parentDiv.innerHTML = `
+      <h3>Parent ${index + 1}</h3>
+      <p><strong>Name:</strong> ${parent.name}</p>
+      <p><strong>Email:</strong> ${parent.email}</p>
+      <p><strong>Phone:</strong> ${parent.phone}</p>
+      <button onclick="editParent(${index})">Edit</button>
+      <button onclick="deleteParent(${index})">Delete</button>
+    `;
+    parentInfoDisplay.appendChild(parentDiv);
+  });
+}
+
+function editParent(index) {
+  var allParents = JSON.parse(localStorage.getItem('parents')) || [];
+  var parentToEdit = allParents[index];
+  if (parentToEdit) {
+    var newName = prompt('Enter new name:', parentToEdit.name);
+    var newEmail = prompt('Enter new email:', parentToEdit.email);
+    var newPhone = prompt('Enter new phone:', parentToEdit.phone);
+    if (newName && newEmail && newPhone) {
+      parentToEdit.name = newName;
+      parentToEdit.email = newEmail;
+      parentToEdit.phone = newPhone;
+      localStorage.setItem('parents', JSON.stringify(allParents));
+      displayAllParents(allParents);
+    } else {
+      alert('Please enter valid information.');
+    }
+  } else {
+    alert('Parent not found.');
+  }
+}
+
+function deleteParent(index) {
+  var confirmDelete = confirm('Are you sure you want to delete this parent?');
+  if (confirmDelete) {
+    var allParents = JSON.parse(localStorage.getItem('parents')) || [];
+    allParents.splice(index, 1);
+    localStorage.setItem('parents', JSON.stringify(allParents));
+    displayAllParents(allParents);
+  }
+}
+</script>
+</body>
+</html>

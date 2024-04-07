@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from account import views
 from django.contrib.auth import views as auth_views
 
+
+
 urlpatterns = [
     path('', views.index, name="index"),
 
@@ -50,6 +52,31 @@ urlpatterns = [
     path('view_data/', views.view_data, name='view_data'),
     path('loginpediatrician/', views.loginpediatrician, name='loginpediatrician'),
     path('loginpsychologist/', views.loginpsychologist, name='loginpsychologist'),
+    path('vote/', views.vote, name='vote'),
+    path('par_vote/', views.par_vote, name='par_vote'),
+    path('ass/', views.ass, name='ass'),
+    path('content/', views.content, name='content'),
+    path('read/', views.read, name='read'),
+    path('doctor_schedule/', views.doctor_schedule, name='doctor_schedule'),
+    path('parent_schedule/', views.parent_schedule, name='parent_schedule'),
+
+
+    path('parent_info/', views.parent_info, name='parent_info'),
+    path('doctor_parent_info/', views.doctor_parent_info, name='doctor_parent_info'),
+    path('doctor_view_parent/', views.doctor_view_parent, name='doctor_view_parent'),
+    path('save_parent_info/', views.save_parent_info, name='save_parent_info'),
+
+
+
+
+    path('write_parent_info/',views.write_parent_info, name='write_parent_info'),
+    path('read_only_parent_info/', views.read_only_parent_info, name='read_only_parent_info'),
+
+
+
+
+
+
 
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="password_reset.html"), name="reset_password"),

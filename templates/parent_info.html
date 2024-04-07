@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Information</title>
+</head>
+<body>
+    <h1>Parent Information</h1>
+    <div>
+        <h2>Name: {{ parent_info.name }}</h2>
+        <p>Email: {{ parent_info.email }}</p>
+        <p>Phone: {{ parent_info.phone }}</p>
+    </div>
+
+    <!-- Add this for debugging -->
+    <script>
+
+// Retrieve content from localStorage and display it
+document.getElementById('write_parent_info').innerText = localStorage.getItem('write_parent_info');
+
+        console.log("Name:", "{{ parent_info.name }}");
+        console.log("Email:", "{{ parent_info.email }}");
+        console.log("Phone:", "{{ parent_info.phone }}");
+    </script>
+</body>
+</html>

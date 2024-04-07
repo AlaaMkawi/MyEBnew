@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import *
-from .models import ParentProfile
+from .models import ParentProfile, Profile
 
 admin.site.register(Parent)
 admin.site.register(Pediatrician)
@@ -15,4 +15,6 @@ admin.site.register(Feedback)
 admin.site.register(Comment)
 admin.site.register(WorkshopSummary)
 admin.site.register(PsychologistSchedule)
+admin.site.register(Profile)
+
 

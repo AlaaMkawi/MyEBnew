@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop Voting</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .workshop {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .workshop h2 {
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .workshop p {
+        color: #666;
+    }
+
+    .vote-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .vote-button:hover {
+        background-color: #0056b3;
+    }
+
+    .votes {
+        margin-left: 10px;
+        font-weight: bold;
+        color: #007bff;
+    }
+</style>
+</head>
+<body>
+
+<div class="workshop">
+    <h2>Compulsory vaccinations for children up to one year old</h2>
+    <p>This workshop focuses on enhancing information for parent about the importance of vaccinations.</p>
+    <button class="vote-button" onclick="vote(this)">Vote</button>
+    <span class="votes">0</span>
+</div>
+
+<div class="workshop">
+    <h2>how to Avoid exposing the infant to allergies?</h2>
+    <p>Learn advanced techniques to avoid infants allergies.</p>
+    <button class="vote-button" onclick="vote(this)">Vote</button>
+    <span class="votes">0</span>
+</div>
+
+<script>
+    function vote(button) {
+        var votesElement = button.nextElementSibling; // Find the sibling element containing the votes count
+        var currentVotes = parseInt(votesElement.textContent); // Get the current votes count
+        var newVotes = currentVotes + 1; // Increment the votes count by 1
+        votesElement.textContent = newVotes; // Update the votes count displayed on the page
+        button.disabled = true; // Disable the button after voting
+        button.style.backgroundColor = '#ccc'; // Change the background color to indicate that the user has voted
+    }
+</script>
+
+</body>
+</html>

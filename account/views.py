@@ -376,3 +376,89 @@ def view_data(request):
 
 def patinfo(request):
     return render(request, 'patinfo.html')
+
+
+def vote(request):
+    return render(request, 'vote.html')
+def par_vote(request):
+    return render(request, 'vote.html')
+
+
+def ass(request):
+    return render(request, 'ass.html')
+def content(request):
+    return render(request, 'content.html')
+
+def read(request):
+    return render(request, 'read.html')
+def doctor_schedule(request):
+    return render(request, 'doctor_schedule.html')
+def parent_schedule(request):
+    return render(request, 'parent_schedule.html')
+
+
+from django.shortcuts import render
+from django.views.generic import View
+from django.http import JsonResponse
+from .models import Parent
+
+
+class ParentFormView(View):
+    def get(self, request):
+        return render(request, 'parent_form.html')
+
+
+class SaveParentInfoView(View):
+    def post(self, request):
+        parent_name = request.POST.get('parent_name')
+        parent_email = request.POST.get('parent_email')
+        parent_phone = request.POST.get('parent_phone')
+
+        # שמירת המידע במודל Parent
+        parent = Parent.objects.create(name=parent_name, email=parent_email, phone=parent_phone)
+
+        return JsonResponse({'success': True})
+
+
+class ParentInfoView(View):
+    def get(self, request):
+        # שליפת כל המידע של ההורים מהמודל Parent
+        all_parents = Parent.objects.all()
+
+        return render(request, 'parent_info.html', {'all_parents': all_parents})
+from django.shortcuts import render
+from .models import Parent
+
+def doctor_parent_info(request):
+    all_parents = Parent.objects.all()
+    return render(request, 'doctor_parent_info.html', {'all_parents': all_parents})
+def parent_info(request):
+    return render(request, 'parent_info.html')
+
+
+def doctor_view_parent(request):
+    return render(request, 'doctor_view_parent.html')
+
+from django.shortcuts import render, redirect
+from .models import Parent
+
+def save_parent_info(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        parent = Parent(name=name, email=email, phone=phone)
+        parent.save()
+        # פה תוכל להוסיף כל פעולה נוספת שתרצה לבצע לאחר ששומרים את המידע
+        # לדוגמה, ניתן לשלוח הודעת אימייל לרופאים או להפנות לדף תודה
+        return redirect('thank_you')
+    else:
+        return render(request, 'parent_info.html')  # אם הבקשה אינה POST, תחזיר את דף parent_info.html
+
+
+def write_parent_info(request):
+    return render(request, 'write_parent_info.html')
+
+def read_only_parent_info(request):
+    return render(request, 'read_parent_info.html')
+

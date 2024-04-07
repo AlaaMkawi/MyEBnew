@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parent Information</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+  }
+  form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  label {
+    font-weight: bold;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  textarea {
+    height: 100px;
+  }
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #7aabb2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #7aabb2;
+  }
+</style>
+</head>
+<body>
+<!-- Title -->
+<h1>Parent Information</h1>
+
+<!-- Form for entering information -->
+<form id="parentForm">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <label for="phone">Phone:</label>
+  <input type="tel" id="phone" name="phone" required><br><br>
+
+  <label for="age">Child's Age:</label>
+  <input type="number" id="age" name="age" required><br><br>
+
+  <label for="challenges">Challenges:</label>
+  <textarea id="challenges" name="challenges" rows="4" cols="50"></textarea><br><br> <!-- Added challenges field -->
+
+  <button type="button" onclick="saveParentInfo()">Save Information</button>
+</form>
+
+<script>
+function saveParentInfo() {
+  var name = document.getElementById('name').value;
+  var email = document.getElementById('email').value;
+  var phone = document.getElementById('phone').value;
+  var age = document.getElementById('age').value;
+  var challenges = document.getElementById('challenges').value; // Retrieve challenges
+
+  // Here you would send the data to the server for storage
+  // You can use AJAX or submit via POST form
+  // For example:
+  // fetch('/save_parent_info/', {
+  //   method: 'POST',
+  //   body: JSON.stringify({ name: name, email: email, phone: phone, age: age, challenges: challenges }),
+  //   headers: { 'Content-Type': 'application/json' }
+  // })
+  // .then(response => {
+  //   if (response.ok) {
+  //     alert('Parent information saved successfully!');
+  //   } else {
+  //     alert('Failed to save parent information.');
+  //   }
+  // })
+  // .catch(error => alert('Failed to save parent information.'));
+
+  // For example, we're currently using local storage for storage
+  var existingParents = JSON.parse(localStorage.getItem('parents')) || [];
+  existingParents.push({ name: name, email: email, phone: phone, age: age, challenges: challenges }); // Include challenges
+  localStorage.setItem('parents', JSON.stringify(existingParents));
+
+  alert('Parent information saved successfully!');
+}
+</script>
+</body>
+</html>

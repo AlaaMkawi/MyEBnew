@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Progress</title>
+<link rel="stylesheet" type="text/css" href="{% static '/css/tracking.schedule.css' %}">
+</head>
+<body>
+<nav>
+<div class="menu">
+<div class="logo">
+<a href="#">welcome :)</a>
+</div>
+<ul>
+<li><a href="#">Services</a></li>
+<li><a href="#">Contact</a></li>
+<li><a href="#">Feedback</a></li>
+</ul>
+</div>
+</nav>
+
+<div class="container">
+<!-- List of patients -->
+<div class="patients">
+<h2>List of Patients</h2>
+<table>
+<tr>
+<th>Parent Name</th>
+</tr>
+<tr>
+<td><a href="#" onclick="showProfile('parent1')">Parent 1</a></td>
+</tr>
+<tr>
+<td><a href="#" onclick="showProfile('parent2')">Parent 2</a></td>
+</tr>
+<!-- Add more parents as needed -->
+</table>
+</div>
+
+<!-- Patient profiles and progress -->
+<div class="parent-profile" id="parent1">
+<h2>Parent Profile 1</h2>
+<!-- Parent information goes here -->
+<div class="progress">
+<h3>Progress Updates</h3>
+<!-- Display progress updates here -->
+<div class="update">
+<p>Date: January 1, 2024</p>
+<p>Update: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+</div>
+<!-- Add more updates as needed -->
+<!-- Form to add new update -->
+<form onsubmit="updateProfile('parent1'); return false;">
+<textarea name="update" placeholder="Enter progress update"></textarea>
+<button type="submit">Save Update</button>
+</form>
+</div>
+</div>
+
+<!-- Parent profile 2 -->
+<div class="parent-profile" id="parent2">
+<h2>Parent Profile 2</h2>
+<!-- Parent information goes here -->
+<div class="progress">
+<h3>Progress Updates</h3>
+<!-- Display progress updates here -->
+<div class="update">
+<p>Date: January 1, 2024</p>
+<p>Update: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+</div>
+<!-- Add more updates as needed -->
+<!-- Form to add new update -->
+<form onsubmit="updateProfile('parent2'); return false;">
+<textarea name="update" placeholder="Enter progress update"></textarea>
+<button type="submit">Save Update</button>
+</form>
+</div>
+</div>
+
+</div>
+
+<script>
+function showProfile(profileId) {
+// Hide all profiles
+var profiles = document.querySelectorAll('.parent-profile');
+profiles.forEach(function(profile) {
+profile.classList.remove('active');
+});
+
+// Show the selected profile
+var selectedProfile = document.getElementById(profileId);
+selectedProfile.classList.add('active');
+}
+
+function updateProfile(profileId) {
+// Get the textarea value
+var updateText = document.querySelector('#' + profileId + ' textarea[name="update"]').value;
+
+// Get the current date and time
+var currentDate = new Date();
+var dateString = currentDate.toDateString(); // תאריך
+var timeString = currentDate.toLocaleTimeString(); // זמן
+
+// Create a new update element with the current date and time
+var updateElement = document.createElement('div');
+updateElement.classList.add('update');
+updateElement.innerHTML = '<p>Date: ' + dateString + ' ' + timeString + '</p><p>Update: ' + updateText + '</p>';
+
+// Append the update element to the progress updates section
+var progressSection = document.querySelector('#' + profileId + ' .progress');
+progressSection.appendChild(updateElement);
+}
+function editUpdate(event) {
+var updateElement = event.target.parentNode;
+var updateTextElement = updateElement.querySelector('.update-content');
+var updateText = updateTextElement.textContent.trim();
+var textarea = document.createElement('textarea');
+textarea.value = updateText;
+var saveButton = document.createElement('button');
+saveButton.textContent = 'Save';
+saveButton.onclick = function() {
+saveChanges(updateElement, textarea.value);
+};
+updateElement.innerHTML = '';
+updateElement.appendChild(textarea);
+updateElement.appendChild(saveButton);
+}
+
+function saveChanges(updateElement, newText) {
+var dateParagraph = updateElement.querySelector('p');
+var dateText = dateParagraph.textContent.trim().split(': ')[1];
+var date = new Date(dateText).toDateString();
+var paragraph = document.createElement('p');
+paragraph.textContent = 'Date: ' + date + '\nUpdate: ' + newText + ' ';
+var editButton = document.createElement('button');
+editButton.textContent = 'Edit';
+editButton.className = 'edit-button';
+editButton.onclick = editUpdate;
+paragraph.appendChild(editButton);
+updateElement.innerHTML = '';
+updateElement.appendChild(paragraph);
+}
+
+
+</script>
+
+</body>
+</html>
+
+

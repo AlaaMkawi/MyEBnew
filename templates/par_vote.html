@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Topics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #7aabb2;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .topic {
+            margin-bottom: 20px;
+        }
+
+        .topic h3 {
+            margin-bottom: 10px;
+        }
+
+        .vote-button {
+            background-color: #7aabb2;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .vote-count {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Workshop Topics</h1>
+    </header>
+
+    <section>
+        <div class="topic">
+            <h3>Compulsory vaccinations for children up to one year old</h3>
+            <p>This workshop focuses on enhancing information for parents about the importance of vaccinations.</p>
+            <button class="vote-button" onclick="vote('topic1')">Vote</button>
+            <span id="topic1-count" class="vote-count">0</span> people have voted
+        </div>
+
+        <div class="topic">
+            <h3>How to Avoid exposing the infant to allergies?</h3>
+            <p>Learn advanced techniques to avoid infants allergies.</p>
+            <button class="vote-button" onclick="vote('topic2')">Vote</button>
+            <span id="topic2-count" class="vote-count">0</span> people have voted
+        </div>
+    </section>
+
+    <script>
+        function vote(topic) {
+            var countElement = document.getElementById(topic + '-count');
+            var count = parseInt(countElement.innerText);
+            countElement.innerText = count + 1;
+        }
+    </script>
+</body>
+</html>
