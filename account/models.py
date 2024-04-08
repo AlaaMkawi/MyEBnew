@@ -13,6 +13,14 @@ class Parent(models.Model):
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True, null=True)
     parantId = models.IntegerField(default=0)
+    #shahd
+    first_name = models.CharField(max_length=100, default='')
+    last_name = models.CharField(max_length=100, default='')
+   # age = models.PositiveIntegerField(default=0)  # Set a default value, such as 0
+    gender = models.CharField(max_length=10, default='')  # Set a default value, such as an empty string
+    child_age = models.PositiveIntegerField(default=0)  # Set a default value, such as 0
+    child_gender = models.CharField(max_length=10, default='')  # Set a default value, such as an empty string
+    challenges = models.TextField(default='')  # Set a default value, such as an empty string
 
 
 class Pediatrician(models.Model):
@@ -22,6 +30,18 @@ class Pediatrician(models.Model):
     email = models.EmailField()
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True, null=True)
+   #shahd
+    PediatricianId = models.IntegerField(default=0)
+    first_name = models.CharField(max_length=100, default='')
+    last_name = models.CharField(max_length=100, default='')
+    gender = models.CharField(max_length=10, default='')  # Set a default value, such as an empty string
+    phone_number = models.CharField(max_length=15, default='')  # Set a default value, such as an empty string
+    specialization = models.CharField(max_length=100, default='')  # Set a default value, such as an empty string
+    experience_years = models.PositiveIntegerField(default=0)  # Set a default value, such as 0
+    qualification = models.CharField(max_length=100, default='')  # Set a default value, such as an empty string
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default='')
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class Psychologist(models.Model):
@@ -32,6 +52,17 @@ class Psychologist(models.Model):
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     PsychologistId = models.IntegerField(default=0)
+    #shahd
+    first_name = models.CharField(max_length=100, default='')
+    last_name = models.CharField(max_length=100, default='')
+    gender = models.CharField(max_length=10, default='')  # Set a default value, such as an empty string
+    phone_number = models.CharField(max_length=15, default='')  # Set a default value, such as an empty string
+    specialization = models.CharField(max_length=100, default='')  # Set a default value, such as an empty string
+    experience_years = models.PositiveIntegerField(default=0)  # Set a default value, such as 0
+    qualification = models.CharField(max_length=100, default='')  # Set a default value, such as an empty string
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default='')
+    def __str__(self):
+          return f"{self.first_name} {self.last_name}"
 
 
 class InformationBoard(models.Model):
