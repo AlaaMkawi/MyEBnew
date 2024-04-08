@@ -7,7 +7,6 @@ import datetime
 class Parent(models.Model):
     name = models.CharField(max_length=50, null=True)
     age = models.IntegerField(default=0)
-
     phone = models.IntegerField(default=0)
     email = models.EmailField()
     babyage = models.IntegerField(default=0)
@@ -153,3 +152,32 @@ class Paropinion(models.Model):
 
     def __str__(self):
         return self.content
+
+
+#SHAHD
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=15)
+    age = models.PositiveIntegerField()
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other')
+    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+
+    def __str__(self):
+        return self.user.username + "'s Profile"
+
+
+
+class Meeting(models.Model):
+    title = models.CharField(max_length=100)
+    date = models.DateField()
+    time = models.TimeField()
+    host = models.CharField(max_length=100)
+
+#PARENT / PSY/PEDy

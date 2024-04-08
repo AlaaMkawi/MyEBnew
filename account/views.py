@@ -27,6 +27,9 @@ from .forms import PediatricianInfoBoard
 from .forms import *
 from .forms import Paropinionform
 from .models import Paropinion
+from .forms import ProfileForm ,MeetingForm
+from django.contrib.auth.decorators import login_required
+from .models import Parent,Pediatrician, Psychologist ,Meeting
 
 
 
@@ -664,3 +667,86 @@ def get_parop_information(request):
     information_items = Paropinion.objects.all()
     data = [{'content': item.content} for item in information_items]
     return JsonResponse(data, safe=False)
+
+
+
+def parent_profView(request, parent_id):
+    parent = Parent.objects.get(id=parent_id)
+    return render(request, 'parent_profView.html', {'parent': parent})
+
+
+def pediatrician_profView(request,pediatrician_id):
+   # pediatrician = Pediatrician.objects.first()
+   pediatrician = Pediatrician.objects.get(id=pediatrician_id)
+   logged_in_pediatrician = Pediatrician.objects.get(user=request.user)
+
+   context = {
+       'pediatrician': logged_in_pediatrician
+   }
+
+  # return render(request, 'pediatrician_profile.html', context)
+   return render(request, 'pediatrician_profView.html', {'pediatrician': pediatrician},context)
+
+def psychologist_profiView(request):
+    psychologist = Psychologist.objects.first()
+    return render(request, 'psychologist_profView.html', {'psychologist': psychologist})
+
+
+
+@login_required
+def Parent_profile(request):
+    profile = request.user.profile
+    return render(request, 'Parent_profile.html', {'profile': profile})
+
+@login_required
+def Parent_editProfile(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'Parent_editProfile.html', {'form': form})
+
+@login_required
+def Ped_profile(request):
+    profile = request.user.profile
+    return render(request, 'Ped_profile.html', {'profile': profile})
+
+@login_required
+def Ped_editProfile(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'Ped_editProfile.html', {'form': form})
+
+@login_required
+def Psy_profile(request):
+    profile = request.user.profile
+    return render(request, 'Psy_profile.html', {'profile': profile})
+
+@login_required
+def Psy_editProfile(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'Psy_editProfile.html', {'form': form})
+
+
+def meeting_board(request):
+    meetings = Meeting.objects.all()
+    return render(request, 'meeting_board.html', {'meetings': meetings})
+
+

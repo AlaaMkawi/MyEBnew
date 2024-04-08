@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        /* CSS styles for navbar and other elements */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000; /* Changed text color to black */
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #ffffff;
+            color: #538d9a;
+            padding: 10px 0;
+        }
+        .menu {
+            max-width: 1250px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .menu .logo a {
+            text-decoration: none;
+            color: #5e8e9a;
+            font-size: 35px;
+            font-weight: 600;
+        }
+        .menu ul {
+            display: inline-flex;
+        }
+        .menu ul li {
+            list-style: none;
+            margin-left: 7px;
+        }
+        .menu ul li:first-child {
+            margin-left: 0px;
+        }
+        .menu ul li a {
+            text-decoration: none;
+            color: #538d9a;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .menu ul li a:hover {
+            background: #538d9a;
+            color: #faf5f5;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-info {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block; /* Added to make labels appear on separate lines */
+        }
+         input[type="text"],
+        input[type="number"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        button[type="button"],
+        button[type="submit"] {
+            background-color: #538d9a;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-right: 5px; /* Added to create spacing between buttons */
+        }
+        button[type="button"]:hover,
+        button[type="submit"]:hover {
+            background-color: #126173;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="menu">
+            <div class="logo">
+                <a href="#">My Profile</a>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Comment</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <h1>My Profile</h1>
+    <div class="profile-info">
+        <form method="post" >
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required><br>
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required><br>
+            <label for="phone_number">Phone Number:</label>
+            <input type="tel" id="phone_number" name="phone_number" pattern="[0-9]{10}" required><br>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="1" max="150" required><br>
+            <label for="gender">Gender:</label><br>
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female" required>
+            <label for="female">Female</label><br>
+            <!-- Additional fields for pediatrician user -->
+            <label for="specialization">Specialization:</label>
+            <input type="text" id="specialization" name="specialization" required><br>
+            <label for="experience_years">Years of Experience:</label>
+            <input type="number" id="experience_years" name="experience_years" min="0" required><br>
+            <label for="qualification">Qualification:</label>
+            <input type="text" id="qualification" name="qualification" required><br>
+            <a href="Ped_editProfile.html">
+            <button type="button">Edit</button>
+          </a>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <!-- JavaScript code -->
+    <script>
+    // Handle form submission
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get form data
+        var firstName = document.getElementById('first_name').value;
+        var lastName = document.getElementById('last_name').value;
+        var phoneNumber = document.getElementById('phone_number').value;
+        var age = document.getElementById('age').value;
+        var gender = document.querySelector('input[name="gender"]:checked').value;
+        var specialization = document.getElementById('specialization').value;
+        var experienceYears = document.getElementById('experience_years').value;
+        var qualification = document.getElementById('qualification').value;
+
+        // Save data to localStorage with a unique key for the pediatrician profile
+        var pedProfileData = {
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber,
+            age: age,
+            gender: gender,
+            specialization: specialization,
+            experienceYears: experienceYears,
+            qualification: qualification
+        };
+        localStorage.setItem('pedUserProfile', JSON.stringify(pedProfileData));
+
+        // Redirect to another page or handle it accordingly
+        window.location.href = 'pediatrician_profView.html';
+    });
+</script>
+
+</body>
+</html>

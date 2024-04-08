@@ -11,6 +11,7 @@ from django import forms
 from .models import BabyHealth
 from .models import InformationBoard
 from .models import Paropinion
+from .models import Profile , Meeting
 
 class CreatUserForm(UserCreationForm):
     class Meta:
@@ -110,3 +111,20 @@ class Paropinionform(forms.ModelForm):
     class Meta:
         model = Paropinion
         fields = ['title', 'content']
+
+
+
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'phone_number', 'age', 'gender']
+
+
+class MeetingForm(forms.ModelForm):
+    class Meta:
+        model = Meeting
+        fields = ['title', 'date', 'time', 'host']
+
+
