@@ -21,6 +21,8 @@ from .models import PsychologistComment
 
 from .models import BabyHealth
 from .forms import BabyHealthForm
+from .forms import PediatricianInfoBoard
+from .models import InformationBoard
 
 
 def loginpsychologist(request):
@@ -462,3 +464,90 @@ def write_parent_info(request):
 def read_only_parent_info(request):
     return render(request, 'read_parent_info.html')
 
+def pedmeetv(request):
+    return render(request, 'pedmeetv.html')
+
+def meetped(request):
+    return render(request, 'meetped.html')
+
+def mwped(request):
+    return render(request, 'mwped.html')
+def pedvmw(request):
+    return render(request, 'pedvmw.html')
+def parboardped(request):
+    return render(request, 'parboardped.html')
+def parboardpsy(request):
+    return render(request, 'parboardpsy.html')
+
+
+
+
+def pedinfoboard(request):
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        item = PediatricianInfoBoard.objects.create(content=content)
+        return JsonResponse({'item_id': item.id})
+    else:
+        items = PediatricianInfoBoard.objects.all()
+        return render(request, 'pedinfoboard.html', {'items': items})
+
+
+def porall(request):
+    return render(request, 'porall.html')
+
+def vmwped(request):
+    return render(request, 'vmwped.html')
+def vmeetped(request):
+    return render(request, 'vmeetped.html')
+
+def psyinfoboard(request):
+    if request.method == 'POST':
+        # If it's a POST request, handle adding an item
+        content = request.POST.get('content')
+        item = InformationBoard.objects.create(content=content)
+        return JsonResponse({'item_id': item.id})
+    else:
+        # If it's a GET request, render the template with existing items
+        items = InformationBoard.objects.all()
+        return render(request, 'psyinfoboard.html', {'items': items})
+def informationboard(request):
+ return render(request, 'informationboard.html')
+
+def parentdashboard(request):
+    return render(request, 'parentdashboard.html')
+
+def delete_item(request, item_id):
+    if request.method == 'POST':
+        item = InformationBoard.objects.get(id=item_id)
+        item.delete()
+        return JsonResponse({'success':True})
+
+
+def get_information(request):
+    # Retrieve all information items added by psychologists
+    information_items = InformationBoard.objects.all()
+
+    # Serialize the information items into JSON format
+    data = [{'content': item.content} for item in information_items]
+
+    # Return the serialized data as a JSON response
+    return JsonResponse(data, safe=False)
+def pedinfoboard(request):
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        item = PediatricianInfoBoard.objects.create(content=content)
+        return JsonResponse({'item_id': item.id})
+    else:
+        items = PediatricianInfoBoard.objects.all()
+        return render(request, 'pedinfoboard.html', {'items': items})
+
+def delete_ped_item(request, item_id):
+    if request.method == 'POST':
+        item = PediatricianInfoBoard.objects.get(id=item_id)
+        item.delete()
+        return JsonResponse({'success': True})
+
+def get_ped_information(request):
+    information_items = PediatricianInfoBoard.objects.all()
+    data = [{'content': item.content} for item in information_items]
+    return JsonResponse(data, safe=False)

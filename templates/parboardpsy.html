@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>information board psy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+           position: fixed;
+           top: 0; /* Position at the top */
+           background: #538d9a;
+           width: 100%;
+           padding: 15px 0;
+           z-index: 20;
+           display: flex; /* Add flex display */
+            justify-content: center; /* Horizontally center items */
+            align-items: center;
+        }
+        nav ul {
+            display: inline;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        nav ul li {
+            list-style: none;
+            margin: 0px;
+        }
+
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background: #fff;
+            color: #538d9a;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 60px;
+        }
+        #information-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px auto;
+            width: 60%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #information-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        #information-list li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href ="{% url 'parhomepage' %}">Home</a></li>
+        </ul>
+    </nav>
+    <h1>Information Board , psychologist</h1>
+    <ul id="information-list">
+        <!-- Information items will be dynamically added here -->
+    </ul>
+
+    <script>
+        // Fetch information items from the backend
+        fetch('/get_information/')  // Replace '/get_information/' with your actual endpoint
+            .then(response => response.json())
+            .then(data => {
+                const informationList = document.getElementById('information-list');
+                // Loop through each item in the data and create list items
+                data.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item.content;
+                    informationList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>

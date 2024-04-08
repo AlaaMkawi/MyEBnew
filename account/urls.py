@@ -87,6 +87,34 @@ urlpatterns = [
 
 
 
+    path('meetped/', views.meetped, name='meetped.html'),
+    path('pedmeetv/', views.pedmeetv, name='pedmeetv.html'),
+    path('meetped/', views.pedmeetv, name='pedmeetv'),
+    path('mwped/', views.mwped, name='mwped.html'),
+    path('pedvmw/', views.pedvmw, name='pedvmw'),
+    path('mwped/', views.pedvmw, name='pedvmw'),
+    path('parboaredped/', views.parboardped, name='parboardped'),
+    path('parboardpsy/', views.parboardpsy, name='parboardpsy'),
+    path('pedinfoboard/', views.pedinfoboard, name='pedinfoboard'),
+    path('porall/', views.porall, name='porall.html'),
+    path('vmwped/', views.vmwped, name='vmwped'),
+    path('vmeetped/', views.vmeetped, name='vmeetped'),
+    path('psyinfoboard/', views.psyinfoboard, name='psyinfoboard'),
+
+
+
+    path('informationboard/', views.informationboard, name='informationboard'),
+    path('parentdashboard/', views.parentdashboard, name='parentdashboard'),
+
+
+
+
+
+
+
+
+
+
 
 
 

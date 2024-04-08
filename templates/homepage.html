@@ -1,1022 +1,187 @@
+<header>
+    <div class="wrapper">
+
+        <ul class="nav-area">
+            <li style="margin-right: 20px;"><a href="{% url 'homepage' %}">Home</a></li>
+            <li style="margin-right: 20px;"><a href="{% url 'aboutus' %}">About</a></li>
+            <li style="margin-right: 20px;" class="dropdown" onclick="toggleDropdown('loginDropdown')">
+                <a href="#" class="dropbtn">Login</a>
+                <div class="dropdown-content" id="loginDropdown">
+                    <a href="{% url 'loginParent' %}">Parent</a>
+                    <a href="{% url 'loginpsychologist' %}">Psychologist</a>
+                    <a href="{% url 'loginpediatrician' %}">Pediatrician</a>
+                </div>
+            </li>
+            <li style="margin-right: 20px;" class="dropdown" onclick="toggleDropdown('signupDropdown')">
+                <a href="#" class="dropbtn">Signup</a>
+                <div class="dropdown-content" id="signupDropdown">
+                    <a href="{% url 'signup' %}">Parent</a>
+                    <a href="{% url 'signuped' %}">Pediatrician</a>
+                    <a href="{% url 'signupys' %}">Psychologist</a>
+                </div>
+            </li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="welcome-text">
+        <h1> MyEB Website</h1>
+
+    </div>
+</header>
 <style>
-    *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-body{
-    background: #080808;
-    color: #fff;
-}
-html{
-    scroll-behavior: smooth;
-}
-#hearder{
+    * {
+        margin: 0;
+        padding: 0;
+    }
 
-    width: 100%;
-    height: 100vh;
-    background-image: url('https://i.pinimg.com/564x/0f/16/65/0f1665d1da02932d76d0d401bbb8d147.jpg');
-    background-position: center;
-    background-size: cover;
-     image-rendering: auto;
+    body {
+        font-family: 'Lato', sans-serif;
+    }
 
-}
-.contenier{
-    padding: 10px 10%;
-}
-nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-.logo{
-    width: 100px;
-    border-radius: 50%;
-    height: 100px;
-}
-nav ul li {
-    display: inline-block;
-    list-style: none;
-    margin: 10px 20px;
-}
-nav ul li a{
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    position: relative;
-}
-nav ul li a::after{
-    content: '';
-    width: 0;
-    height: 3px;
-    background: #1092de;
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    transition: 0.5s;
-}
-nav ul li a:hover::after{
-    width: 100%;
+    .wrapper {
+        width: 1170px;
+        margin: auto;
+    }
 
-}
-.hearder-text{
-    font-size: 30px;
-    margin-top: 20%;
+    header {
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(https://i.pinimg.com/474x/bf/89/7c/bf897cd240cfbef3ee5c943901ce383b.jpg);
+        height: 100vh;
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+    }
 
-}
-.hearder-text h1{
-    font-size: 60px;
-    margin-top: 20px;
+    .nav-area {
+        float: right;
+        list-style: none;
+        margin-top: 30px;
+    }
 
-}
+    .nav-area li {
+        display: inline-block;
+    }
 
-.hearder-text h1 span{
-    color: #1092de;
-}
-
-/*---------start about section-------*/
-#about{
-    padding: 80px 0;
-   color: #fff;
-   background-color: whitesmoke;
-}
-.row{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.about-col-1{
-    flex-basis: 35%;
-}
-.about-col-1 img{
-    width: 100%;
-    border-radius: 15px;
-    height: 426px;
-
-}
-.about-col-2{
-    flex-basis: 60%;
-    color: black;
-}
-
-.sub-title{
-    font-size: 60px;
-    font-weight: 600;
-
-}
-.tab-titles{
-    display: flex;
-    margin: 20px 0 40px;
-}
-.tab-links{
-    margin-right: 50px;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
-}
-.tab-links::after{
-    content: '';
-    width: 0;
-    height: 3px;
-    background: #1092de;
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    transition: 0.5s;
-}
-.tab-links.active-link::after{
-    width: 50%;
-}
-.tab-contents ul li{
-    list-style: none;
-    margin: 10px 0;
-}
-.tab-contents ul li span{
-    color: #1092de;
-    font-size: 14px;
-}
-.tab-contents{
-    display: none;
-}
-.tab-contents.active-tab{
-    display: block;
-}
-
-/*----------------End About section -------------*/
-
-
-/*----------------start service section -------------*/
-#services{
-    padding: 30px 0;
-    background: #074751;
-
-}
-#services .contenier{
-    text-align: center;
-}
-#services .contenier p{
-    margin-top: 15px;
-}
-
-
-.services-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-    grid-gap: 40px;
-    margin-top: 50px;
-}
-.services-list div{
-    background: #231f1f;
-    padding: 40px;
-    font-size: 13px;
-    font-weight: 300;
-    border-radius: 10px;
-    transition: background 0.5s, transform 0.5s;
-
-}
-.services-list div img{
-    margin-bottom: 30px;
-}
-.services-list div h2{
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 15px;
-}
-.services-list div a{
-    text-decoration: none;
-    color: #fff;
-    font-size: 12px;
-    margin-top: 20px;
-    display: inline-block;
-    border: 1px solid #fff;
-    padding: 10px;
-    border-radius: 5px;
-}
-.services-list div a:hover{
-    background: #1092de;
-
-}
-.services-list div:hover{
-    background: #1092de;
-    transform: translateY(-10px);
-
-}
-
-
-
-
-/*----------------end service section -------------*/
-
-
-/*----------------start portfolio section -------------*/
-#portfolio{
-    padding: 50px 0;
-}
-#portfolio .contenier{
-    text-align: center;
-}
-#portfolio .contenier p{
-    margin-top: 15px;
-}
-.work-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-    grid-gap: 40px;
-    margin-top: 50px;
-
-}
-.work{
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-}
-.work img{
-    width: 100%;
-    border-radius: 10px;
-    display: block;
-    transition: transform 0.5s;
-}
-.layer{
-    width: 100%;
-    height: 0;
-    background: linear-gradient(#1092de,crimson);
-    border-radius: 10px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 40px;
-    text-align: center;
-    font-size: 14px;
-    transition: height 0.5s;
-}
-.layer h3{
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-.layer a{
-    margin-top: 20px;
-    color: #1092de;
-    text-decoration: none;
-    font-size: 18px;
-    line-height: 40px;
-    background: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    text-align: center;
-}
-.work:hover img{
-    transform: scale(1.1);
-}
-.work:hover .layer{
-    height: 100%;
-}
-.btn{
-    display: block;
-    margin: 50px auto;
-    width: fit-content;
-    border: 1px solid #1092de;
-    padding: 14px 50px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #fff;
-    transition: background 0.5s;
-}
-.btn:hover{
-    background: #1092de;
-    transform: scale(1.1);
-}
-#contact{
-    background: #092d38;
-    padding-top: 50px;
-}
-.contact-left{
-    flex-basis: 35%;
-}
-.contact-right{
-    flex-basis: 60%;
-}
-.contact-left p{
-    margin-top: 30px;
-
-}
-.contact-left p i{
-    color: #1092de;
-    margin-right: 15px;
-    font-size: 25px;
-
-}
-.social-icons{
-    margin-top: 30px;
-
-}
-.social-icons a{
-    text-decoration: none;
-    font-size: 30px;
-    margin-right: 15px;
-    color: white;
-    display: inline-block;
-    transition: transform 0.5s;
-}
-.social-icons a:hover{
-    color: #1092de;
-    transform: translateY(-5px);
-}
-.btn.btn2{
-    background: #1092de;
-    display: inline-block;
-}
-.btn.btn2:hover{
-    background: #100d0d;
-}
-.contact-right form {
-    width: 100%;
-
-
-}
-form input, form textarea{
-    width: 100%;
-    border: 0;
-    outline: none;
-    background: #fff;
-    padding: 15px;
-    margin: 15px 0;
-    color: black;
-    font-size: 18px;
-    border-radius: 6px;
-}
-form .btn2{
-    padding: 14px 60px;
-    font-size: 18px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-.copyright{
-    width: 100%;
-    text-align: center;
-    padding: 25px 0;
-    background: #000000;
-    font-weight: 300;
-    margin-top: 20px;
-}
-.copyright i{
-    color: #de102d;
-}
-
-
-/*---------------- End Contact section -------------*/
-
-nav .fa-solid{
-    display: none;
-}
-@media Only Screen and (max-width:600px){
-    .hearder-text{
-        margin-top: 50%;
+    .nav-area li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 5px 20px;
+        font-family: poppins;
         font-size: 16px;
+        text-transform: uppercase;
     }
-    .hearder-text h1{
-        font-size: 30px;
-    }
-    nav .fa-solid{
-        display: block;
-        font-size: 25px;
-    }
-    nav ul{
-        background: #1092de;
-        position: fixed;
-        top: 0;
-        right: -200px;
-        width: 200px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right 0.5s;
-    }
-    nav ul li{
-        display: block;
-        margin: 25px;
 
+    .nav-area li a:hover {
+        background: #fff;
+        color: #333;
     }
-    nav ul .fa-solid{
+
+    .logo {
+        float: left;
+    }
+
+    .logo img {
+        width: 100%;
+        padding: 15px 0;
+    }
+
+    .welcome-text {
         position: absolute;
-        top: 25px;
-        left: 25px;
-        cursor: pointer;
-    }
-    .sub-title{
-        font-size: 40px;
+        width: 600px;
+        height: 300px;
+        margin: 20% 25%; /* Changed margin from 20% 30% to 20% 25% */
+        text-align: center;
 
     }
-    .about-col-1, .about-col-2{
-        flex-basis: 100%;
-    }
-    .about-col-1{
-        margin-bottom: 30px;
-    }
-   .about-col-2{
-    font-size: 14px;
-   }
-   .tab-links{
-    font-size: 16px;
-    margin-right: 20px;
 
-   }
-   .contact-left, .contact-right{
-    flex-basis: 100%;
-   }
-   .copyright{
-    font-size: 14px;
-   }
-
-/* סגנון קודם עבור הכפתורים */
-nav .login-signup-buttons {
-    display: flex;
-    align-items: center;
-}
-
-nav .login-signup-buttons select {
-    background: transparent;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    margin-right: 20px;
-    cursor: pointer;
-}
-
-nav .login-signup-buttons select:focus {
-    outline: none;
-}
-
-/* סגנון העיצוב הכללי של הכפתורים */
-.nav .login-signup-buttons select option {
-    background-color: #080808;
-    color: #fff;
-    font-size: 18px;
-    border: none;
-}
-
-.nav .login-signup-buttons select option:hover {
-    background-color: #1092de;
-}
-/* עיצוב כללי ל-sections בדף הבית */
-.section {
-    padding: 80px 0;
-    text-align: center;
-}
-
-.section h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.section p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 40px;
-}
-
-.section .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.section .container img {
-    width: 100%;
-    max-width: 600px;
-}
-
-.section .container .content {
-    flex: 1;
-    margin: 0 20px;
-    text-align: left;
-}
-
-.section .container .content h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.section .container .content p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.section .container .content a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #1092de;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.section .container .content a:hover {
-    background-color: #0b6eb8;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    float: left; /* Align the dropdown to the right */
-
-}
-
-/* Dropdown button */
-/* סגנון כללי לתיבות ההתחברות וההרשמה */
-.nav .login-signup-buttons select {
-    background: transparent;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    margin-right: 20px;
-    cursor: pointer;
-}
-
-.nav .login-signup-buttons select:focus {
-    outline: none;
-}
-
-/* סגנון עבור האפשרויות בתיבות */
-.nav .login-signup-buttons select option {
-    background-color: #080808;
-    color: #fff;
-    font-size: 18px;
-    border: none;
-}
-
-.nav .login-signup-buttons select option:hover {
-    background-color: #1092de;
-}
-/* סגנון כללי לתיבות ההתחברות וההרשמה */
-.nav .login-signup-buttons select {
-    background: transparent;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    margin-right: 20px;
-    cursor: pointer;
-}
-
-.nav .login-signup-buttons select:focus {
-    outline: none;
-}
-
-/* סגנון עבור האפשרויות בתיבות */
-.nav .login-signup-buttons select option {
-    background-color: #080808;
-    color: #fff;
-    font-size: 18px;
-    border: none;
-}
-
-.nav .login-signup-buttons select option:hover {
-    background-color: #1092de;
-}
-/* סגנון כללי לתיבות ההתחברות וההרשמה */
-.nav .login-signup-buttons select {
-    background: transparent;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    margin-right: 20px;
-    cursor: pointer;
-}
-
-.nav .login-signup-buttons select:focus {
-    outline: none;
-}
-
-/* סגנון עבור האפשרויות בתיבות */
-.nav .login-signup-buttons select option {
-    background-color: #080808;
-    color: #fff;
-    font-size: 18px;
-    border: none;
-}
-
-.nav .login-signup-buttons select option:hover {
-    background-color: #1092de;
-}
-/* סגנון כללי לתיבות ההתחברות וההרשמה */
-.nav .login-signup-buttons select {
-    background: transparent;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    margin-right: 20px;
-    cursor: pointer;
-}
-
-.nav .login-signup-buttons select:focus {
-    outline: none;
-}
-
-/* סגנון העיצוב הכללי של האפשרויות בתיבות */
-.nav .login-signup-buttons select option {
-    background-color: #080808;
-    color: #fff;
-    font-size: 18px;
-    border: none;
-}
-
-/* עיצוב האפשרויות בתיבות כאשר העכבר עובר מעליהן */
-.nav .login-signup-buttons select option:hover {
-    background-color: #1092de;
-}
-/* סגנון כללי לתיבות ההתחברות וההרשמה */
-.nav .login-signup-buttons select {
-    background: transparent;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    margin-right: 20px;
-    cursor: pointer;
-}
-
-.nav .login-signup-buttons select:focus {
-    outline: none;
-}
-
-/* סגנון העיצוב הכללי של האפשרויות בתיבות */
-.nav .login-signup-buttons select option {
-    background-color: #080808;
-    color: #fff;
-    font-size: 18px;
-    border: none;
-}
-
-/* עיצוב האפשרויות בתיבות כאשר העכבר עובר מעליהן */
-.nav .login-signup-buttons select option:hover {
-    background-color: #1092de;
-}
-
-/* סגנון עבור התיבה עצמה */
-.nav .login-signup-buttons select {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 5px;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom 0.3s ease-in-out;
-}
-
-.nav .login-signup-buttons select:hover,
-.nav .login-signup-buttons select:focus {
-    border-bottom: 2px solid #1092de;
-}
-/* CSS עבור רשימת הניווט */
-.nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 20px 10%;
-}
-
-.nav ul {
-    display: flex;
-    align-items: center;
-    list-style: none;
-}
-
-.nav ul li {
-    margin: 0 20px;
-}
-
-.nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    position: relative;
-}
-
-.nav ul li a::after {
-    content: '';
-    width: 0;
-    height: 3px;
-    background: #1092de;
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    transition: 0.5s;
-}
-
-.nav ul li a:hover::after {
-    width: 100%;
-}
-
-.nav .fa-solid {
-    display: none;
-}
-
-@media only screen and (max-width: 600px) {
-    .nav .fa-solid {
-        display: block;
-        font-size: 25px;
+    .welcome-text h1 {
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 60px;
     }
 
-    .nav ul {
-        background: #1092de;
-        position: fixed;
-        top: 0;
-        right: -200px;
-        width: 200px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right 0.5s;
+    .welcome-text a {
+        border: 1px solid #fff;
+        padding: 10px 25px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 14px;
+        margin-top: 20px;
+        display: inline-block;
+        color: #fff;
     }
 
-    .nav ul li {
-        display: block;
-        margin: 25px;
+    .welcome-text a:hover {
+        background: #fff;
+        color: #333;
     }
 
-    .nav ul .fa-solid {
+    /* Responsive */
+
+    @media (max-width: 600px) {
+        .wrapper {
+            width: 100%;
+        }
+
+        .logo {
+            float: none;
+            width: 50%;
+            text-align: center;
+            margin: auto;
+        }
+
+        img {
+            width:0px;
+        }
+
+        .nav-area {
+            float: none;
+            margin-top: 0;
+        }
+
+        .nav-area li a {
+            padding: 5px;
+            font-size: 11px;
+        }
+
+        .nav-area {
+            text-align: center;
+        }
+
+        .welcome-text {
+            width: 100%;
+            height: auto;
+            margin: 30% 0;
+        }
+
+        .welcome-text h1 {
+            font-size: 30px;
+        }
+    }
+
+    /* Dropdown Styles */
+    .dropdown-content {
+        display: none;
         position: absolute;
-        top: 25px;
-        left: 25px;
-        cursor: pointer;
+        background-color: #537a88;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
     }
-}
 
+    .dropdown-content a {
+        color: #f2f2f2;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
 
-
-}
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
 </style>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/all.css">
-    <title>my profile</title>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body onload="loader()">
-    <div id="Loading"></div>
-     <!-----start Hearder section----->
-     <div id="hearder"  data-aos="fade-up"
-     data-aos-anchor-placement="top-bottom">
-        <div class="contenier">
-           <!-- HTML עבור תיבת הסגנון החדש -->
-<nav class="nav">
-    <ul id="sidmenu" data-aos="zoom-in">
-        <li><a href="#hearder">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#portfolio">Our Project</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="login-signup-buttons">
-            <select id="loginOptions" onchange="changeLoginOption()">
-                <option value="">Log in as...</option>
-                <option value="{% url 'loginParent' %}">Parent</option>
-                <option value="{% url 'loginpsychologist' %}">Psychologist</option>
-                <option value="{% url 'loginpediatrician' %}">Pediatrician</option>
-            </select>
-        </li>
-        <li class="login-signup-buttons">
-            <select id="signupOptions" onchange="changeSignupOption()">
-                <option value="">Sign up as...</option>
-                <option value="{% url 'signup' %}">Parent</option>
-                <option value="{% url 'signupys' %}">Psychologist</option>
-                <option value="{% url 'signuped' %}">Pediatrician</option>
-            </select>
-        </li>
-
-        <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
-    </ul>
-    <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-
-</nav>
-
-              <div class="hearder-text"  data-aos="fade-right"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-sine">
-                <p>New parent guidance</p>
-                <h1>Hello to your guidance  <span>MyEB</span> <br> website</h1>
-              </div>
-            </div>
-        </div>
-     </div>
-      <!-----End Hearder section----->
-
-
-      <!-----start About section----->
-      <div id="about"data-aos="fade-up"
-      data-aos-anchor-placement="center-bottom">
-        <div class="contenier">
-            <div class="row">
-                <div class="about-col-1">
-                  <img src="https://i.pinimg.com/474x/7e/5a/94/7e5a94a055c44d99b5fabbf5defeecda.jpg" data-aos="zoom-in" >
-                </div>
-                <div class="about-col-2" data-aos="zoom-in">
-                    <h1 class="sub-title">About Me</h1>
-                    <p> Your trusted resource for assisting new parents in caring for their children up to the age of one.
-        <p>At MyEB, we understand the challenges that come with parenting, especially during the first year. Our mission is to provide support, guidance, and resources to help parents navigate the early stages of their child's development with confidence.
-        Whether you have questions about infant care, feeding, sleep patterns, or developmental milestones, we're here to help. Our team of experts is dedicated to ensuring that parents have the knowledge and support they need to give their children the best start in life.</p>
-
-                </div>
-            </div>
-        </div>
-      </div>
-      <!-----End About section----->
-
-
-
-
-      <!-----Service section Start----->
-     <div id="services" data-aos="fade-up"
-     data-aos-anchor-placement="top-center">
-        <div class="contenier" >
-            <h1 class="sub-title">My Services</h1>
-            <div class="services-list">
-                <div data-aos="fade-right">
-                    <img src="">
-                    <h2>Communities and Support</h2>
-                    <p> Creating online communities and forums for parents to share experiences, ask questions, and receive emotional support.</p>
-                    <a href="#">Learn More</a>
-                </div>
-                <div data-aos="flip-up">
-                    <img src="" >
-                    <h2>Guides and Articles</h2>
-                    <p> Publishing guides and articles on topics related to child growth and development, including tips and advice from experts.
-
-
-
-
-
-
-</p>
-                    <a href="#">Learn More</a>
-                </div>
-                <div data-aos="fade-left">
-                    <img src="" >
-                    <h2>Health Counseling</h2>
-                    <p> Counseling and guidance for parents on the topic of infant health .</p>
-                    <a href="#">Learn More</a>
-                </div>
-
-            </div>
-
-        </div>
-     </div>
-      <!----services section end ----->
-
-
-        <!----portfolio section Start ----->
-
-        <div id="portfolio">
-            <div class="contenier">
-                <h1 class="sub-title">My Repositories</h1>
-                <p> </p>
-                <div class="work-list" >
-                    <div class="work" data-aos="zoom-in">
-                        <img src="https://i.pinimg.com/474x/e1/d0/04/e1d00406005f817dcbe61569538bf679.jpg" >
-                        <div class="layer">
-                            <h3>Community Engagement</h3>
-                            <p> Connect with other parents facing similar challenges and experiences through our chat feature. Share tips, strategies, and emotional support in a supportive and inclusive community of fellow parents who understand what you're going through.</p>
-                            <a target="_blank"  href=""><i class="fa-solid fa-up-right-from-square"></i></a>
-                        </div>
-
-                    </div>
-                    <div class="work" data-aos="zoom-in">
-                        <img src="https://i.pinimg.com/474x/31/17/32/311732e8c7496aae4c803a5a64b33f8b.jpg" >
-                        <div class="layer">
-                            <h3>Expert Advice</h3>
-                            <p> Our team of pediatricians and psychologists are here to provide expert advice and guidance tailored to your specific needs and concerns. From developmental milestones to behavioral issues, our professionals offer invaluable insights and recommendations to help you navigate the challenges of parenting with confidence.</p>
-                            <a target="_blank"  href=""><i class="fa-solid fa-up-right-from-square"></i></a>
-                        </div>
-
-                    </div>
-                    <div class="work" data-aos="zoom-in">
-                        <img src="https://i.pinimg.com/474x/a7/0e/b9/a70eb957f3c60daee13fdfe153d8b825.jpg" >
-                        <div class="layer">
-                            <h3>Convenience</h3>
-                            <p>Our chat feature is seamlessly integrated into our website, making it easy and convenient to access from any device, whether you're at home or on the go. No need to download additional apps or navigate multiple platforms – everything you need is right here at your fingertips.</p>
-                            <a target="_blank"  href=""><i class="fa-solid fa-up-right-from-square"></i></a>
-                        </div>
-
-                    </div>
-
-                </div>
-                <a href="" class="btn">Learn More</a>
-
-            </div>
-        </div>
-         <!----portfolio section End ----->
-
-
-          <!----Contact section Start ----->
-          <div id="contact"  >
-            <div class="contenier">
-                <div class="row">
-                    <div class="contact-left"  data-aos="fade-up-right">
-                        <h1 class="sub-title">Contact Me</h1>
-                        <p><i class="fa-solid fa-paper-plane"></i>Demo@gmail.com</p>
-                        <p><i class="fa-solid fa-square-phone-flip"></i>9999-9999-99</p>
-                        <div class="social-icons" data-aos="zoom-in">
-
-                            <a target="_blank" class="instagram" href=""><i class="fa-brands fa-square-instagram"></i></a>
-                            <a target="_blank" class="github" href=""><i class="fa-brands fa-github"></i></a>
-                            <a target="_blank" class="linkedin" href=""><i class="fa-brands fa-linkedin"></i></a>
-                        </div>
-                        <a href="" class="btn btn2">View Resume</a>
-
-                    </div>
-                    <div class="contact-right" data-aos="fade-up-left">
-                        <form >
-                            <input type="text" name="Name" placeholder="Your Name" required>
-                            <input type="Email" name="Email" placeholder="Your Email" required>
-                            <textarea name="massage" rows="6" placeholder="Your Message"></textarea>
-                            <button type="submit" class="btn btn2">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>Copyright &copy; 2024 Website Developed By <span style="color: rgb(224, 44, 44);">MyEB Group</span></p>
-            </div>
-          </div>
-
-          <!----Contact section End ----->
-          <script>
-            var preloader = document.getElementById("Loading");
-            function loader(){
-              preloader.style.display = 'none';
-            }
-          </script>
-
-      <script>
-        var tablinks = document.getElementsByClassName("tab-links");
-        var tabcontents = document.getElementsByClassName("tab-contents");
-        function opentab(tabname){
-            for(tablink of tablinks){
-                tablink.classList.remove("active-link");
-            }
-            for(tabcontent of tabcontents){
-                tabcontent.classList.remove("active-tab");
-            }
-            event.currentTarget.classList.add("active-link");
-            document.getElementById(tabname).classList.add("active-tab");
-        }
-
-      </script>
-
-    <!-- aos data  -->
-      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-      <script>
-        AOS.init({
-          duration: 900,
-        });
-      </script>
-    <script>
-        var sidmenu = document.getElementById("sidmenu");
-        function openmenu(){
-            sidmenu.style.right ="0";
-        }
-        function closemenu(){
-            sidmenu.style.right ="-200px";
-        }
-        // תוסיף את פונקציית changeLoginOption לתוך קובץ ה-JavaScript
-function changeLoginOption() {
-    var loginOptions = document.getElementById("loginOptions");
-    var selectedOption = loginOptions.options[loginOptions.selectedIndex].value;
-    if (selectedOption !== "") {
-        window.location.href = selectedOption;
-    }
-}
-// תוסיף את פונקציית changeSignupOption לתוך קובץ ה-JavaScript
-function changeSignupOption() {
-    var signupOptions = document.getElementById("signupOptions");
-    var selectedOption = signupOptions.options[signupOptions.selectedIndex].value;
-    if (selectedOption !== "") {
-        window.location.href = selectedOption;
-    }
-}
-
-    </script>
-
-
-</body>
-</html>
