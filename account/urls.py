@@ -47,7 +47,7 @@ urlpatterns = [
     path('view_data/', views.view_data, name='view_data'),
     path('loginpediatrician/', views.loginpediatrician, name='loginpediatrician'),
     path('loginpsychologist/', views.loginpsychologist, name='loginpsychologist'),
-    path('feedbackl/', views.feedbackl, name='feedbackl'),
+
     path('psyinfoboard/', views.psyinfoboard, name='psyinfoboard'),
     path('delete_item/<int:item_id>/', views.delete_item, name='delete_item'),
     path('get_information/', views.get_information, name='get_information'),
@@ -84,5 +84,9 @@ urlpatterns = [
     path('track_delete/<int:pk>', views.track_delete, name='track_delete'),
     path('track_add', views.track_add, name='track_add'),
     path('track_edit/<int:pk>', views.track_edit, name='track_edit'),
+    path('parop/', views.parop, name='parop'),
+    path('delete_parop_item/<int:item_id>/', views.delete_parop_item, name='delete_parop_item'),
+    path('get_parop_information/', views.get_parop_information, name='get_parop_information'),
+
 
 ]

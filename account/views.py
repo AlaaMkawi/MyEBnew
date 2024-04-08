@@ -25,7 +25,8 @@ from .models import BabyHealth
 from .forms import BabyHealthForm
 from .forms import PediatricianInfoBoard
 from .forms import *
-
+from .forms import Paropinionform
+from .models import Paropinion
 
 
 
@@ -379,19 +380,6 @@ def view_data(request):
     data_list = BabyHealth.objects.all()
     return render(request, 'view_data.html', {'data_list': data_list})
 
-def feedbackl(request):
-    return render(request, 'feedbackl.html')
-def feedbackl(request):
-    if request.method == 'POST':
-        form = FeedbackForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('feedbackl')  # Redirect to the feedback page after submission
-    else:
-        form = FeedbackForm()
-
-    feedbacks = Feedback.objects.all()
-    return render(request, 'feedbackl.html', {'form': form, 'feedbacks': feedbacks})
 
 def psyinfoboard(request):
     if request.method == 'POST':
@@ -655,3 +643,24 @@ def track_edit(request, pk):
        return render(request, 'track_edit.html', {'form':form})
     else:
        return redirect('tracka')
+def porall(request):
+    return render(request, 'porall.html')
+def parop(request):
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        item =Paropinion.objects.create(content=content)
+        return JsonResponse({'item_id': item.id})
+    else:
+        items = Paropinion.objects.all()
+        return render(request, 'parop.html', {'items': items})
+
+def delete_parop_item(request, item_id):
+    if request.method == 'POST':
+        item = Paropinion.objects.get(id=item_id)
+        item.delete()
+        return JsonResponse({'success': True})
+
+def get_parop_information(request):
+    information_items = Paropinion.objects.all()
+    data = [{'content': item.content} for item in information_items]
+    return JsonResponse(data, safe=False)

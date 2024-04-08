@@ -204,3 +204,171 @@ class DeleteParTestCase(TestCase):
         self.assertEqual(response.status_code, 200)  # Ensure the response status is OK
         self.assertTemplateUsed(response, 'homepage.html')  # Ensure the correct template is used
 
+from django.test import TestCase
+from django.urls import reverse
+from .models import InformationBoard
+from .views import psyinfoboard, delete_item, get_information
+from django.test import RequestFactory
+
+class PsyInfoBoardViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_psyinfoboard_GET(self):
+        # Create some sample items
+        InformationBoard.objects.create(content='Item 1')
+        InformationBoard.objects.create(content='Item 2')
+
+        # Make GET request
+        request = self.factory.get(reverse('psyinfoboard'))
+        response = psyinfoboard(request)
+
+        # Check if the response status code is 200
+        self.assertEqual(response.status_code, 200)
+
+        # Check if the response contains the items
+        self.assertContains(response, 'Item 1')
+        self.assertContains(response, 'Item 2')
+
+    def test_delete_item_POST(self):
+    # Create a sample item
+        item = InformationBoard.objects.create(content='Item to delete')
+
+    # Make POST request to delete the item
+        request = self.factory.post(reverse('delete_item', args=[item.id]))
+        response = delete_item(request, item_id=item.id)
+
+    # Check if the item was deleted successfully
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b'{"success": true}')
+
+    def test_get_information(self):
+    # Create some sample items
+        InformationBoard.objects.create(content='Item 1')
+        InformationBoard.objects.create(content='Item 2')
+
+    # Make GET request
+        request = self.factory.get(reverse('get_information'))
+        response = get_information(request)
+
+    # Check if the response status code is 200
+        self.assertEqual(response.status_code, 200)
+
+    # Check if the response contains the correct information items
+        expected_data = b'[{"content": "Item 1"}, {"content": "Item 2"}]'
+        self.assertEqual(response.content, expected_data)
+
+
+
+
+from django.test import TestCase
+from django.urls import reverse
+from .models import PediatricianInfoBoard
+from .views import pedinfoboard, delete_ped_item, get_ped_information
+from django.test import RequestFactory
+
+class PedInfoBoardViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_psyinfoboard_GET(self):
+        # Create some sample items
+        PediatricianInfoBoard.objects.create(content='Item 1')
+        PediatricianInfoBoard.objects.create(content='Item 2')
+
+        # Make GET request
+        request = self.factory.get(reverse('pedinfoboard'))
+        response = pedinfoboard(request)
+
+        # Check if the response status code is 200
+        self.assertEqual(response.status_code, 200)
+
+        # Check if the response contains the items
+        self.assertContains(response, 'Item 1')
+        self.assertContains(response, 'Item 2')
+
+    def test_delete_ped_item_POST(self):
+    # Create a sample item
+        item = PediatricianInfoBoard.objects.create(content='Item to delete')
+
+    # Make POST request to delete the item
+        request = self.factory.post(reverse('delete_item', args=[item.id]))
+        response = delete_ped_item(request, item_id=item.id)
+
+    # Check if the item was deleted successfully
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b'{"success": true}')
+
+    def test_get_ped_information(self):
+    # Create some sample items
+        PediatricianInfoBoard.objects.create(content='Item 1')
+        PediatricianInfoBoard.objects.create(content='Item 2')
+
+    # Make GET request
+        request = self.factory.get(reverse('get_ped_information'))
+        response = get_ped_information(request)
+
+    # Check if the response status code is 200
+        self.assertEqual(response.status_code, 200)
+
+    # Check if the response contains the correct information items
+        expected_data = b'[{"content": "Item 1"}, {"content": "Item 2"}]'
+        self.assertEqual(response.content, expected_data)
+
+
+
+
+from django.urls import reverse
+from .models import Paropinion
+from .views import parop, delete_parop_item, get_parop_information
+from django.test import RequestFactory
+from django.test import TestCase
+class ParopViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_parop_GET(self):
+        # Create some sample items
+        Paropinion.objects.create(content='Item 1')
+        Paropinion.objects.create(content='Item 2')
+
+        # Make GET request
+        request = self.factory.get(reverse('parop'))
+        response = parop(request)
+
+        # Check if the response status code is 200
+        self.assertEqual(response.status_code, 200)
+
+        # Check if the response contains the items
+        self.assertContains(response, 'Item 1')
+        self.assertContains(response, 'Item 2')
+
+    def test_delete_parop_item_POST(self):
+    # Create a sample item
+        item = Paropinion.objects.create(content='Item to delete')
+
+    # Make POST request to delete the item
+        request = self.factory.post(reverse('delete_item', args=[item.id]))
+        response = delete_parop_item(request, item_id=item.id)
+
+    # Check if the item was deleted successfully
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b'{"success": true}')
+
+    def test_get_parop_information(self):
+    # Create some sample items
+        Paropinion.objects.create(content='Item 1')
+        Paropinion.objects.create(content='Item 2')
+
+    # Make GET request
+        request = self.factory.get(reverse('get_parop_information'))
+        response = get_parop_information(request)
+
+    # Check if the response status code is 200
+        self.assertEqual(response.status_code, 200)
+
+    # Check if the response contains the correct information items
+        expected_data = b'[{"content": "Item 1"}, {"content": "Item 2"}]'
+        self.assertEqual(response.content, expected_data)
+
+

@@ -10,6 +10,7 @@ from .models import WorkshopSummary
 from django import forms
 from .models import BabyHealth
 from .models import InformationBoard
+from .models import Paropinion
 
 class CreatUserForm(UserCreationForm):
     class Meta:
@@ -104,3 +105,8 @@ class AddTrackForm(forms.ModelForm):
         exclude = ("user",)
 
 
+
+class Paropinionform(forms.ModelForm):
+    class Meta:
+        model = Paropinion
+        fields = ['title', 'content']
