@@ -48,24 +48,7 @@ class Login(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
 
-class Workshop(models.Model):
-    name = models.CharField(max_length=100)
-    date = models.DateField()
-    time = models.TimeField()
-    location = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.name
-
-
-class ParentProfile(models.Model):
-    parent_name = models.CharField(max_length=100)
-    parent_email = models.EmailField(max_length=254)
-    parent_phone = models.CharField(max_length=15)
-    child_name = models.CharField(max_length=100)
-    child_age = models.IntegerField()
-    child_gender = models.CharField(max_length=10)
-    challenges = models.TextField()
 
 from django.db import models
 

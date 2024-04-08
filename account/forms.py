@@ -24,12 +24,6 @@ class ParentSignupForm(forms.ModelForm):
         model = User
         fields = ['username', 'email', 'password']
 
-from .models import ParentProfile
-
-class ParentProfileForm(forms.ModelForm):
-    class Meta:
-        model = ParentProfile
-        fields = '__all__'
 
 
 

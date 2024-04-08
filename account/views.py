@@ -6,10 +6,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreatUserForm
 from .forms import ParentSignupForm, CreatUserForm
-from .models import Workshop
 from django.contrib.auth import logout
-from .models import ParentProfile
-from .forms import ParentProfileForm
 from .forms import FeedbackForm
 from .forms import Feedback
 from .models import Comment
@@ -70,8 +67,6 @@ def schedulepys(request):
     return render(request, 'schedulepys.html')
 
 
-def Workshopys(request):
-    return render(request, 'Workshopys.html')
 
 
 def loginpediatrician(request):
@@ -176,32 +171,7 @@ def signuped(request):
     return render(request, 'signuped.html', {'form': form})
 
 
-def add_workshop(request):
-    if request.method == 'POST':
-        workshop_name = request.POST.get('workshop_name')
-        workshop_date = request.POST.get('workshop_date')
-        workshop_time = request.POST.get('workshop_time')
-        workshop_location = request.POST.get('workshop_location')
 
-        # Create a new Workshop object
-        workshop = Workshop.objects.create(
-            name=workshop_name,
-            date=workshop_date,
-            time=workshop_time,
-            location=workshop_location
-        )
-
-        return redirect('successpage')
-
-    return render(request, 'addworkshopform.html')
-
-
-def addworkshopform(request):
-    return render(request, 'pyschhomepage.html')
-
-
-def parentprofile(request):
-    return render(request, 'parentprofile.html')
 
 
 def successpage(request):
@@ -246,39 +216,6 @@ def articls(request):
 def parent_comment(request):
     return render(request, 'parent_comment.html')
 
-def submit_profile(request):
-    if request.method == 'POST':
-        # טיפול בנתונים שנשלחו מהטופס
-        parent_name = request.POST.get('parent_name')
-        parent_email = request.POST.get('parent_email')
-        parent_phone = request.POST.get('parent_phone')
-        child_name = request.POST.get('child_name')
-        child_age = request.POST.get('child_age')
-        child_gender = request.POST.get('child_gender')
-        challenges = request.POST.get('challenges')
-
-        # עשוי להיות רצוי להוסיף לקוד זה לוגיקה נוספת לשמירת הנתונים במסד הנתונים או לעיבוד נוסף
-        # במקרה זה אני מניח שהפונקציה תחזיר תגובה אוקסלית לבקשת ה-POST
-        return HttpResponse("Profile submitted successfully!")
-
-    else:
-        return HttpResponseBadRequest("Bad request")
-"""def submit_profile(request):
-     return render(request, 'submit_profile.html')"""
-
-"""def submit_profile(request):
-    if request.method == 'POST':
-        form = ParentProfileForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('profile_detail')  # Redirect to profile detail page
-    else:
-        form = ParentProfileForm()
-    return render(request, 'submit_profile.html', {'form': form})"""
-
-def profile_detail(request):
-    profiles = ParentProfile.objects.all()
-    return render(request, 'profile_detail.html', {'profiles': profiles})
 
 
 def feedback_submit(request):
