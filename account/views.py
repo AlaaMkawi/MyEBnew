@@ -24,6 +24,8 @@ from .forms import InformationBoardForm
 from .models import BabyHealth
 from .forms import BabyHealthForm
 from .forms import PediatricianInfoBoard
+from .forms import *
+
 
 
 
@@ -458,3 +460,198 @@ def vmeetped(request):
     return render(request, 'vmeetped.html')
 def porall(request):
     return render(request, 'porall.html')
+def sorall(request):
+    return render(request, 'sorall.html')
+#alaa
+
+
+def parpedhomepage(request):
+    return render(request, 'par.ped.homepage.html')
+def add_extra_informationpeda(request):
+    if request.method == 'POST':
+        form = ExtraInfoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('extrainfopeda')
+    else:
+        form = ExtraInfoForm()
+    return render(request, 'add_extra_informationa.html', {'form': form})
+def add_extra_informationpsya(request):
+    if request.method == 'POST':
+        form = ExtraInfoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('extrainfopsya')
+    else:
+        form = ExtraInfoForm()
+    return render(request, 'add_extra_informationa_psy.html', {'form': form})
+
+
+def view_extra_informationpara(request):
+    extra_info = ExtraInfo.objects.all()
+    return render(request, 'extrainfopara.html', {'extra_info': extra_info})
+def view_extra_informationpeda(request):
+    extra_info = ExtraInfo.objects.all()
+    return render(request, 'extrainfopeda.html', {'extra_info': extra_info})
+def view_extra_informationpsya(request):
+    extra_info = ExtraInfo.objects.all()
+    return render(request, 'extrainfopsya.html', {'extra_info': extra_info})
+
+def delete_(request):
+    if request.method == 'POST':
+        if 'check_details' in request.POST:
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            email = request.POST.get('email')
+            user = authenticate(request, username=username, password=password)
+            if user is not None and user.email == email:
+                # Save the user object in the session
+                request.session['user'] = {'username': user.username, 'email': user.email}
+                # Display confirmation message
+                messages.info(request, 'Are you sure you want to delete your account?')
+                return redirect('delete_confirm')
+            else:
+                messages.error(request, 'Invalid username, password, or email.')
+        return render(request, 'delete_.html')
+    else:
+        return render(request, 'delete_.html')
+def delete_ped(request):
+    if request.method == 'POST':
+        if 'check_details' in request.POST:
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            email = request.POST.get('email')
+            user = authenticate(request, username=username, password=password)
+            if user is not None and user.email == email:
+                # Save the user object in the session
+                request.session['user'] = {'username': user.username, 'email': user.email}
+                # Display confirmation message
+                messages.info(request, 'Are you sure you want to delete your account?')
+                return redirect('delete_confirm_ped')
+            else:
+                messages.error(request, 'Invalid username, password, or email.')
+        return render(request, 'delete_ped.html')
+    else:
+        return render(request, 'delete_ped.html')
+def delete_psy(request):
+    if request.method == 'POST':
+        if 'check_details' in request.POST:
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            email = request.POST.get('email')
+            user = authenticate(request, username=username, password=password)
+            if user is not None and user.email == email:
+                # Save the user object in the session
+                request.session['user'] = {'username': user.username, 'email': user.email}
+                # Display confirmation message
+                messages.info(request, 'Are you sure you want to delete your account?')
+                return redirect('delete_confirm_psy')
+            else:
+                messages.error(request, 'Invalid username, password, or email.')
+        return render(request, 'delete_psy.html')
+    else:
+        return render(request, 'delete_psy.html')
+
+def delete_confirm(request):
+    if request.method == 'POST':
+        if 'confirm' in request.POST:
+            # Delete user account
+            user = User.objects.get(username=request.session['user']['username'])
+            user.delete()
+            # Clear the user object from the session
+            del request.session['user']
+            messages.success(request, 'Your account has been deleted successfully.')
+            return redirect('homepage')
+        elif 'cancel' in request.POST:
+            # Clear the user object from the session
+            del request.session['user']
+            return redirect('delete_')
+    elif 'user' in request.session:
+        # Display confirmation message
+        return render(request, 'delete_confirm.html')
+    else:
+        messages.error(request, 'Invalid request.')
+        return redirect('homepage')
+
+def delete_confirm_ped(request):
+    if request.method == 'POST':
+        if 'confirm' in request.POST:
+            # Delete user account
+            user = User.objects.get(username=request.session['user']['username'])
+            user.delete()
+            # Clear the user object from the session
+            del request.session['user']
+            messages.success(request, 'Your account has been deleted successfully.')
+            return redirect('homepage')
+        elif 'cancel' in request.POST:
+            # Clear the user object from the session
+            del request.session['user']
+            return redirect('delete_ped')
+    elif 'user' in request.session:
+        # Display confirmation message
+        return render(request, 'delete_confirm_ped.html')
+    else:
+        messages.error(request, 'Invalid request.')
+        return redirect('homepage')
+def delete_confirm_psy(request):
+    if request.method == 'POST':
+        if 'confirm' in request.POST:
+            # Delete user account
+            user = User.objects.get(username=request.session['user']['username'])
+            user.delete()
+            # Clear the user object from the session
+            del request.session['user']
+            messages.success(request, 'Your account has been deleted successfully.')
+            return redirect('homepage')
+        elif 'cancel' in request.POST:
+            # Clear the user object from the session
+            del request.session['user']
+            return redirect('delete_psy')
+    elif 'user' in request.session:
+        # Display confirmation message
+        return render(request, 'delete_confirm_psy.html')
+    else:
+        messages.error(request, 'Invalid request.')
+        return redirect('homepage')
+
+def track(request):
+    tracks = Track.objects.all()
+    return render(request, 'tracka.html', {'tracks':tracks})
+
+def track_next(request, pk):
+    if request.user.is_authenticated:
+       # Look Up Records
+       track_next = Track.objects.get(id=pk)
+       return render(request, 'track2.html', {'track_next':track_next})
+    else:
+       return redirect('tracka')
+
+def track_delete(request, pk):
+    if request.user.is_authenticated:
+       delete_it = Track.objects.get(id=pk)
+       delete_it.delete()
+       return redirect('tracka')
+    else:
+       return redirect('tracka')
+
+def track_add(request):
+	form = AddTrackForm(request.POST or None)
+	if request.user.is_authenticated:
+		if request.method == "POST":
+			if form.is_valid():
+				add_record = form.save()
+				return redirect('tracka')
+		return render(request, 'track_add.html', {'form':form})
+	else:
+		return redirect('tracka')
+
+def track_edit(request, pk):
+    if request.user.is_authenticated:
+       current_record = Track.objects.get(id=pk)
+       form = AddTrackForm(request.POST or None, instance=current_record)
+       if form.is_valid():
+          form.save()
+          return redirect('tracka')
+       return render(request, 'track_edit.html', {'form':form})
+    else:
+       return redirect('tracka')

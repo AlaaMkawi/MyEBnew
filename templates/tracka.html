@@ -1,11 +1,14 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Board</title>
+    <title>Tracking Schedule</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/tracka.css' %}">
     <style>
-        body {
+                body {
             font-family: Arial, sans-serif;
             background-color: #ffffff;
             margin: 0;
@@ -64,7 +67,8 @@
         table {
             width: 70%;
             border-collapse:collapse;
-            margin: 20px auto
+            margin: 20px auto;
+            margin-top: 150px;
 
         }
         th, td {
@@ -117,92 +121,69 @@
         .delete-button:hover {
             background-color: #e60000;
         }
+        .btn-dark {
+            background-color: #538d9a;
+            border-color: #538d9a;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            margin-top: 20px;
+            align-items: center;
+
+        }
+
+        .btn-dark:hover {
+            background-color: #126173;
+        }
+
+
     </style>
 </head>
 <body>
     <nav>
         <div class="menu">
             <div class="logo">
-                <a href="#">Meeting Board</a>
+                <a href="#">Tracking Schedule</a>
             </div>
             <ul>
                 <li><a href="{% url 'pedhomepage' %}">Home</a></li>
-                
+
             </ul>
         </div>
     </nav>
-    <h1>Monthly Workshops Meetings Board</h1>
-    <table id="workshopTable">
-        <thead>
+    {% block content %}
+
+    {% if user.is_authenticated %}
+
+        <table id="workshopTable">
+          <thead>
             <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Host</th>
-                <th>Action</th>
+              <th scope="col">Name</th>
+              <th scope="col">Explanation</th>
             </tr>
-        </thead>
-        <tbody id="workshopTableBody">
-            <!-- Workshop rows will be added dynamically here -->
-        </tbody>
-    </table>
+          </thead>
+          <tbody>
 
-    <script>
-        // Retrieve workshops for the current user from localStorage
-        const userId = 'ped'; // Replace with the appropriate user identifier
-        const workshops = JSON.parse(localStorage.getItem('workshops_' + userId)) || [];
+            {% if tracks %}
+                {% for track in tracks %}
+                    <tr>
+                        <td><a href="{% url 'track2' track.id %}">{{ track.parent.name }}</a></td>
+                        <td>{{ track.explanation }}</td>
 
-        // Get the table body element
-        const workshopTableBody = document.getElementById('workshopTableBody');
+                    </tr>
+                {% endfor %}
+            {% endif %}
 
-        // Function to display workshops in the table
-        function displayWorkshops() {
-            // Clear existing rows
-            workshopTableBody.innerHTML = '';
+          </tbody>
+        </table>
+        <a href="{% url 'track_add' %}" class="btn btn-dark">Add</a>
 
-            // Iterate over each workshop and create a row for it
-            workshops.forEach(workshop => {
-                const { title, date, time, host } = workshop;
+    {% endif %}
 
-                // Create a table row for the workshop
-                const workshopRow = document.createElement('tr');
-                workshopRow.innerHTML = `
-                    <td>${title}</td>
-                    <td>${date}</td>
-                    <td>${time}</td>
-                    <td>${host}</td>
-                    <td>
-                        <button class="delete-button" onclick="deleteWorkshop('${title}')">Delete</button>
-                    </td>
-                `;
-                workshopTableBody.appendChild(workshopRow);
-            });
-        }
-
-        // Call the function to display workshops in the table
-        displayWorkshops();
-
-        // Function to handle deleting a workshop
-        function deleteWorkshop(title) {
-            // Find the index of the workshop with the specified title
-            const index = workshops.findIndex(workshop => workshop.title === title);
-
-            // Check if the workshop exists
-            if (index !== -1) {
-                // Remove the workshop from the array
-                workshops.splice(index, 1);
-
-                // Update localStorage with the updated workshops array
-                localStorage.setItem('workshops_' + userId, JSON.stringify(workshops));
-
-                // Update the table to reflect the changes
-                displayWorkshops();
-
-                console.log('Workshop deleted successfully.');
-            } else {
-                console.log('Workshop not found.');
-            }
-        }
-    </script>
+    {% endblock %}
 </body>
 </html>

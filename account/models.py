@@ -127,3 +127,21 @@ class PediatricianInfoBoard(models.Model):
 
     def __str__(self):
         return self.content
+
+class Track(models.Model):
+    parent = models.ForeignKey(Parent, on_delete=models.CASCADE)
+    explanation = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.parent.name} - {self.parent.parantId} - {self.explanation}"
+
+    @property
+    def product_name(self):
+        return self.parent.name
+
+    @property
+    def product_price(self):
+        return self.parent.parantId
+
+class Traking(Parent):
+    explanation = models.TextField(blank=True, null=True)

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add track</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/track2.css' %}">
+    </head>
+
+    <body>
+        {% block content %}
+
+
+        <nav>
+
+            <div class="menu">
+                <div class="logo">
+                <a href="#">Tracking Schedule</a>
+                </div>
+                <ul>
+                    <li><a href="{% url 'pedhomepage' %}">Home</a></li>
+                </ul>
+             </div>
+        </nav>
+        <div class="card">
+          <div class="card-header"><strong>
+                {{ track.parent }}</strong>
+          </div>
+          <div class="card-body">
+
+            <p class="card-text">
+                <div class="container">
+                    <strong>Name: </strong>{{ track_next.parent.name }}
+                    <br>
+                    <strong>Age: </strong>{{ track_next.parent.age }}
+                    <br>
+                    <strong>Babyage: </strong>{{ track_next.parent.babyage }}
+                    <br>
+                    <strong>Email: </strong>{{ track_next.parent.email }}
+                    <br>
+                    <strong>ParantId: </strong>{{ track_next.parent.parantId }}
+                    <br>
+                    <strong>Phone: </strong>{{ track_next.parent.phone }}
+                    <br>
+                    <br>
+                    <strong>Explanation: </strong>{{ track_next.explanation }}
+                </div></p>
+
+          </div>
+        </div>
+
+        <br/><br/>
+            <a href="{% url 'tracka' %}" class="btn btn-secondary">Back</a>
+            <a href="{% url 'track_delete' track_next.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'track_edit' track_next.id %}" class="btn btn-secondary">Edit</a>
+
+
+        {% endblock %}
+    </body>
+</html>

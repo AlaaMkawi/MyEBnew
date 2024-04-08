@@ -7,7 +7,6 @@ from account import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-
     path('psychomepage/', views.psychomepage, name='psychomepage'),
     path('homepage/', views.homepage, name='homepage'),
     path('feedback/', views.feedback, name='feedback'),
@@ -62,7 +61,28 @@ urlpatterns = [
     path('pedvmw/', views.pedvmw, name='pedvmw'),
     path('meetped/', views.meetped, name='meetped'),
     path('pedmeetv/',views.pedmeetv, name='pedmeetv'),
-    path('vmeetped/', views.vmeetped, name='vmwwtped'),
+    path('vmeetped/', views.vmeetped, name='vmeetped'),
     path('porall/',views.porall, name='porall'),
+    #alaa
+
+    path('extrainfopara', views.view_extra_informationpara, name='extrainfopara'),
+    path('extrainfopeda', views.view_extra_informationpeda, name='extrainfopeda'),
+    path('extrainfopsya', views.view_extra_informationpsya, name='extrainfopsya'),
+    path('add_extra_informationa/', views.add_extra_informationpeda, name='add_extra_informationa'),
+    path('add_extra_informationa_psy/', views.add_extra_informationpsya, name='add_extra_informationa_psy'),
+    path('parhomepage', views.parhomepage, name='parhomepage'),
+    path('par.ped.homepage', views.parpedhomepage, name='par.ped.homepage'),
+    path('sorall/', views.sorall, name='sorall'),
+    path('delete_', views.delete_, name='delete_'),
+    path('delete_confirm', views.delete_confirm, name='delete_confirm'),
+    path('delete_ped', views.delete_ped, name='delete_ped'),
+    path('delete_confirm_ped', views.delete_confirm_ped, name='delete_confirm_ped'),
+    path('delete_psy', views.delete_psy, name='delete_psy'),
+    path('delete_confirm_psy', views.delete_confirm_psy, name='delete_confirm_psy'),
+    path('tracka', views.track, name='tracka'),
+    path('track2/<int:pk>', views.track_next, name='track2'),
+    path('track_delete/<int:pk>', views.track_delete, name='track_delete'),
+    path('track_add', views.track_add, name='track_add'),
+    path('track_edit/<int:pk>', views.track_edit, name='track_edit'),
 
 ]

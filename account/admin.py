@@ -15,4 +15,7 @@ admin.site.register(Feedback)
 admin.site.register(Comment)
 admin.site.register(WorkshopSummary)
 admin.site.register(PsychologistSchedule)
+admin.site.register(Traking)
+admin.site.register(Track)
+
 

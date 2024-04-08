@@ -70,3 +70,37 @@ class InformationBoardForm(forms.ModelForm):
     class Meta:
         model = InformationBoard
         fields = ['title', 'content']
+
+
+#alaa
+
+class ParentForm(forms.ModelForm):
+    class Meta:
+        model = Parent
+        fields = '__all__'
+
+class PediatricianForm(forms.ModelForm):
+    class Meta:
+        model = Pediatrician
+        fields = '__all__'
+
+class PsychologistForm(forms.ModelForm):
+    class Meta:
+        model = Psychologist
+        fields = '__all__'
+
+class ExtraInfoForm(forms.ModelForm):
+    class Meta:
+        model = ExtraInfo
+        fields = '__all__'
+
+
+class AddTrackForm(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"name", "class":"form-control"}), label="")
+    explanation = forms.CharField(required=True, widget=forms.widgets.Textarea(attrs={"placeholder":"Explanation", "class":"form-control"}), label="")
+
+    class Meta:
+        model = Track
+        exclude = ("user",)
+
+
