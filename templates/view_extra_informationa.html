@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Extra Information</title>
+</head>
+<body>
+    <h1>Extra Information</h1>
+    <ul>
+        {% for info in extra_info %}
+        <li>{{ info.title }} - {{ info.content }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'homea' %}" class="btn btn-secondary">Back</a>
+
+</body>
+</html>

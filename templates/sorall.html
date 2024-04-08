@@ -5,13 +5,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> Website Layout | Welcome :)</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+rel="stylesheet">
 
 <!-- Bootstrap Icons CSS (Optional) -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+rel="stylesheet">
 
 <style>
 * {
@@ -100,7 +104,8 @@ background: rgb(83, 141, 154);
 display: flex;
 justify-content: center;
 align-items: center;
-margin-top: 70px; /* Adjusted margin-top to create space between navbar and squares */
+margin-top: 30px; /* Adjusted margin-top to create space between
+navbar and squares */
 }
 
 .square {
@@ -111,7 +116,7 @@ background-color: #7aabb2; /* Square background color */
 margin: 40px; /* Increased space between squares */
 text-align: center;
 line-height: 250px;
-font-size: 24px;
+font-size: 15px;
 color: white; /* Text color */
 cursor: pointer;
 transition: background-color 0.3s ease; /* Smooth transition */
@@ -120,7 +125,6 @@ transition: background-color 0.3s ease; /* Smooth transition */
 .square:hover {
 background-color: #538d9a; /* Hover color */
 }
-
 .square::after {
 content: attr(data-text); /* Display the word on hover */
 position: absolute;
@@ -147,27 +151,22 @@ opacity: 1; /* Show the word on hover */
 <a href="#">Psychologist :)</a>
 </div>
 <ul>
-<li><a href="#">comments</a></li>
-<li><a href="#">more</a></li>
+<li><a href="{% url 'psychomepage' %}">Home</a></li>
 
 </ul>
 </div>
 </nav>
 <div class="img"></div>
-
 <div class="container">
-<a href="{% url 'sorall' %}" class="square" data-text="Workshops">
+<a href=" {% url 'homepage' %}" class="square" data-text="workshops_summary">
 
-<i class="bi bi-person-video3" style="font-size: 70px;"></i>
-
+<i class="bi bi-journal-arrow-up" style="font-size: 70px;"></i>
 </a>
-<a href="{% url 'extrainfopsya' %}" class="square" data-text="Extra Info">
+<a href=" {% url 'homepage' %}" class="square" data-text="workshops_meetings">
 
-<i class="bi bi-journal-text" style="font-size: 70px;"></i>
-</a>
-<a href="{% url 'psyinfoboard' %}" class="square" data-text="Info board">
-<i class="bi bi-layout-text-window-reverse" style="font-size: 66px;" ></i>
+<i class="bi bi-person-hearts" style="font-size: 70px;"></i>
 </a>
 </div>
+
 </body>
 </html>

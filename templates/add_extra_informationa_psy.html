@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/add_extra_information_psy.css' %}">
+    <title>Add Extra Information</title>
+</head>
+<body>
+        <nav>
+
+            <div class="menu">
+                <div class="logo">
+                <a href="#">Extra Information</a>
+                </div>
+                <ul>
+                </ul>
+             </div>
+        </nav>
+        <div class="container">
+            <h1>Add Extra Information</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+                <a href="{% url 'extrainfopsya' %}" class="btn btn-secondary">Back</a>
+
+            </form>
+        </div>
+</body>
+</html>

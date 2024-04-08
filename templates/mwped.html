@@ -157,9 +157,12 @@
     <input type="url" id="ped_workshop_link" name="workshop_link" placeholder="Enter workshop link..." required>
 
     <button type="button" onclick="addWorkshopForped()">Add Meeting</button>
+
   </form>
 </div>
-
+<a href="{% url 'porall' %}" class="btn btn-secondary">Back</a>
+      <br>
+<br>
 <script>
     function addWorkshopForped() {
         const title = document.getElementById('ped_workshop_title').value;
