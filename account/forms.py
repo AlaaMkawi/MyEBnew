@@ -108,6 +108,10 @@ class Paropinionform(forms.ModelForm):
 
 
 
+class WorkshopForm(forms.ModelForm):
+    class Meta:
+        model = Workshop
+        fields = ['title', 'day', 'time', 'link']
 
 
 class ProfileForm(forms.ModelForm):

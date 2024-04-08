@@ -20,4 +20,9 @@ admin.site.register(Track)
 admin.site.register(PediatricianInfoBoard)
 admin.site.register(Paropinion)
 
+admin.site.register(Workshop)
+admin.site.register(Meeting)
+admin.site.register(Profile)
+
+
 

@@ -83,7 +83,9 @@ urlpatterns = [
     path('get_parop_information/', views.get_parop_information, name='get_parop_information'),
 
   #SHAHD
-      path('Parent_profile/', views.Parent_profile, name='profile'),
+    path('workshop/', views.workshops, name='workshop'),
+    path('create_workshop/', views.create_workshop, name='create_workshop'),
+    path('Parent_profile/', views.Parent_profile, name='profile'),
     path('Ped_profile/', views.Ped_profile, name='profile'),
     path('Psy_profile/', views.Psy_profile, name='profile'),
     path('Parent_editProfile/', views.Parent_editProfile, name='Parent_editProfile'),

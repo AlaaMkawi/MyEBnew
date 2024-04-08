@@ -628,6 +628,21 @@ def psychologist_profiView(request):
     psychologist = Psychologist.objects.first()
     return render(request, 'psychologist_profView.html', {'psychologist': psychologist})
 
+def create_workshop(request):
+    if request.method == 'POST':
+        form = WorkshopForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Set workshop_added to True after successfully adding workshop
+            workshop_added = True
+            return render(request, 'create_workshop.html', {'form': form, 'workshop_added': workshop_added})
+    else:
+        form = WorkshopForm()
+    return render(request, 'create_workshop.html', {'form': form})
+
+def workshops(request):
+    #workshops = Workshop.objects.all()
+    return render(request, 'workshop.html', {'workshops': workshops})
 
 
 @login_required

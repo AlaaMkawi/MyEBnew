@@ -13,6 +13,8 @@ class Parent(models.Model):
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True, null=True)
     parantId = models.IntegerField(default=0)
+
+
 class Pediatrician(models.Model):
     name = models.CharField(max_length=50, null=True)
     age = models.IntegerField(default=0)
@@ -20,7 +22,7 @@ class Pediatrician(models.Model):
     email = models.EmailField()
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True, null=True)
-    PediatricianId = models.IntegerField(default=0)
+
 
 class Psychologist(models.Model):
     name = models.CharField(max_length=50, null=True)
@@ -156,6 +158,11 @@ class Profile(models.Model):
         return self.user.username + "'s Profile"
 
 
+class Workshop(models.Model):
+    title = models.CharField(max_length=100)
+    day = models.DateField()
+    time = models.TimeField()
+    link = models.URLField()
 
 class Meeting(models.Model):
     title = models.CharField(max_length=100)
@@ -163,4 +170,4 @@ class Meeting(models.Model):
     time = models.TimeField()
     host = models.CharField(max_length=100)
 
-#PARENT / PSY/PEDy
+
