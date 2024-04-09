@@ -100,5 +100,7 @@ urlpatterns = [
     path('pediatrician_profView/', views.pediatrician_profView, name='pediatrician_profView'),
     path('psychologist_profView/', views.psychologist_profiView, name='psychologist_profView'),
     path('parent_profView/<int:parent_id>/', views.parent_profView, name='parent_profView'),
+    path('content/', views.content, name='content'),
+    path('read/', views.read, name='read'),
 
 ]

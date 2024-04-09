@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Read-only Page</title>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  nav {
+    background-color: #7aabb2;
+    color: #fff;
+    padding: 10px 20px;
+  }
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+  ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .container {
+    margin: 20px;
+  }
+  h2 {
+    color: black;
+  }
+  #contentDisplay {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+</style>
+
+</head>
+<body>
+<nav>
+<div class="menu">
+<div class="logo">
+<a href="#">Welcome :)</a>
+</div>
+<ul>
+
+
+<li><a href="{% url 'logout' %}">Logout</a></li>
+</ul>
+</div>
+</nav>
+
+<div class="container">
+<h2>Content</h2>
+<div id="contentDisplay"></div>
+</div>
+
+<script>
+// Retrieve content from localStorage and display it
+document.getElementById('contentDisplay').innerText = localStorage.getItem('content');
+</script>
+
+</body>
+</html>

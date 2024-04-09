@@ -139,7 +139,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account was created for {username}')
-            return redirect('homepageforparents')
+            return redirect('parhomepage')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
@@ -713,3 +713,9 @@ def view_data_ped(request):
     data_list = BabyHealth.objects.all()
     return render(request, 'view_data_ped.html', {'data_list': data_list})
 
+
+def content(request):
+    return render(request, 'content.html')
+
+def read(request):
+    return render(request, 'read.html')

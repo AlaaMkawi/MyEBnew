@@ -41,7 +41,7 @@
 
         /* סגנון עבור כפתור השליחה */
         input[type="submit"] {
-            background-color:#D4A29C;
+            background-color:#7aabb2;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -75,16 +75,16 @@
     {% csrf_token %}
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
-    
+
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
-    
+
     <label for="password1">Password:</label>
     <input type="password" id="password1" name="password1" required>
-    
+
     <label for="password2">Confirm Password:</label>
     <input type="password" id="password2" name="password2" required>
-    
+
     <input type="submit" value="Create User">
 </form>
 
@@ -93,4 +93,7 @@
 
 
 </body>
+<label for="password1">**Password (must be strong - include at least 8 characters,
+     including uppercase, lowercase, numbers, and special characters):</label>
+<input type="password" id="password1" name="password1" required>
 </html>
