@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/track_edit.css' %}">
+
+    </head>
+    <body>
+        {% block content %}
+        <nav>
+            <div class="menu">
+                <div class="logo">
+                <a href="#">Tracking Schedule</a>
+                </div>
+                <ul>
+                    <li><a href="{% url 'pedhomepage' %}">Home</a></li>
+                </ul>
+             </div>
+        </nav>
+        <div class="col-md-6 offset-md-3">
+            <div class="container">
+
+                <h1>Edit Track</h1>
+                <br/>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <br/>
+                    <button type="submit" class="btn btn-secondary">Edit Track</button>
+                    <a href="{% url 'tracka' %}" class="btn btn-secondary">Back</a>
+                </form>
+            </div>
+
+
+        </div>
+
+        {% endblock %}
+    </body>
+</html>

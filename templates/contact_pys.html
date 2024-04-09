@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% csrf_token %}
+    <title>Contact Psychologists</title>
+    <style>
+        /* Reset and general styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        header {
+            background-color: #D4A29C;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .psychologist {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color:#D4A29C;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contact Psychologists</h1>
+    </header>
+
+    <section>
+        <div class="psychologist">
+            <h2>Dr. John Doe</h2>
+            <p>Specialty: Child Psychology</p>
+            <p>Email: john.doe@example.com</p>
+            <p>Phone: 123-456-7890</p>
+        </div>
+
+        <div class="psychologist">
+            <h2>Dr. Jane Smith</h2>
+            <p>Specialty: Adolescent Psychology</p>
+            <p>Email: jane.smith@example.com</p>
+            <p>Phone: 987-654-3210</p>
+        </div>
+
+        <div class="psychologist">
+            <h2>Dr. Michael Johnson</h2>
+            <p>Specialty: Family Therapy</p>
+            <p>Email: michael.johnson@example.com</p>
+            <p>Phone: 555-123-4567</p>
+        </div>
+
+        <div class="psychologist">
+            <h2>Dr. Emily White</h2>
+            <p>Specialty: Cognitive Behavioral Therapy</p>
+            <p>Email: emily.white@example.com</p>
+            <p>Phone: 444-987-6543</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>All rights reserved &copy; 2024</p>
+    </footer>
+</body>
+</html>

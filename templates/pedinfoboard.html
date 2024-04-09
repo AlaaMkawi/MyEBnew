@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Information Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        nav {
+           position: fixed;
+           top: 0; /* Position at the top */
+           background: #538d9a;
+           width: 100%;
+           padding: 15px 0;
+           z-index: 20;
+           display: flex; /* Add flex display */
+            justify-content: center; /* Horizontally center items */
+            align-items: center;
+        }
+        nav ul {
+            display: inline;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        nav ul li {
+            list-style: none;
+            margin: 0px;
+        }
+         
+       
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background: #fff;
+            color: #538d9a;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 60px;
+        }
+        #add-item-form {
+            margin: 20px auto;
+            width: 60%;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #add-item-form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            resize: none;
+            margin-bottom: 10px;
+        }
+        #add-item-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 2px;
+            cursor: pointer;
+            float: right;
+        }
+        #add-item-form button:hover {
+            background-color: #0056b3;
+        }
+        #item-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 auto;
+            width: 60%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        #item-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        #item-list li:last-child {
+            border-bottom: none;
+        }
+        #item-list li button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            float: right;
+        }
+        #item-list li button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'pedhomepage' %}">Home</a></li>
+            
+        </ul>
+    </nav>
+
+    <h1>Information Board</h1>
+    <form id="add-item-form" method="POST">
+        {% csrf_token %}
+        <textarea id="item-content" name="content" placeholder="Add new info..."></textarea>
+        <button type="submit">Add Item</button>
+    </form>
+    <ul id="item-list">
+        {% for item in items %}
+            <li>{{ item.content }} <button class="delete-item" data-item-id="{{ item.id }}">Delete</button></li>
+        {% endfor %}
+    </ul>
+
+    <script>
+       
+                
+                document.getElementById('add-item-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var content = document.getElementById('item-content').value;
+            fetch(window.location.href, {  
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: 'content=' + encodeURIComponent(content)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Check if the response contains the item_id
+                if (data.hasOwnProperty('item_id')) {
+                    var itemList = document.getElementById('item-list');
+                    var li = document.createElement('li');
+                    li.textContent = content;
+                    var button = document.createElement('button');
+                    button.textContent = 'Delete';
+                    button.setAttribute('class', 'delete-item');
+                    button.setAttribute('data-item-id', data.item_id);
+                    li.appendChild(button);
+                    itemList.appendChild(li);
+                    // Clear the textarea after successful addition
+                    document.getElementById('item-content').value = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-item')) {
+                var itemId = event.target.getAttribute('data-item-id');
+                fetch('/delete_ped_item/' + itemId + '/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        event.target.parentElement.remove();
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>
