@@ -89,13 +89,13 @@
     <header>
 
         <h1>Chat Section</h1>
-        <li><a href="{% url 'parhomepage' %}">Home</a></li>
+        <li><a href="{% url 'pedhomepage' %}">Home</a></li>
 
     </header>
 
     <section>
         <h2>Add New Data</h2>
-        <form action="{% url 'add_data' %}" method="post">
+        <form action="{% url 'add_data_ped' %}" method="post">
             {% csrf_token %}
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
