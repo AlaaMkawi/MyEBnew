@@ -4,6 +4,8 @@ from django.contrib import admin
 from .models import *
 from .models import PediatricianInfoBoard
 from .models import Paropinion
+from .models import Profile
+
 admin.site.register(Parent)
 admin.site.register(Pediatrician)
 admin.site.register(Psychologist)
@@ -23,6 +25,7 @@ admin.site.register(Paropinion)
 admin.site.register(Workshop)
 admin.site.register(Meeting)
 admin.site.register(Profile)
+
 
 
 
