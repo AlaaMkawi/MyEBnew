@@ -178,7 +178,7 @@
         localStorage.setItem('pedUserProfile', JSON.stringify(pedProfileData));
 
         // Redirect to another page or handle it accordingly
-        window.location.href = 'pediatrician_profView.html';
+        window.location.href = '{% url 'pediatrician_profView.html' %}';
     });
 </script>
 

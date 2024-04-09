@@ -147,15 +147,15 @@
         <a href="#">Psychologist :)</a>
       </div>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Comment</a></li>
+        <li><a href="{% url 'parhomepage' %}">Home</a></li>
+        <li><a href="">Comment</a></li>
       </ul>
     </div>
   </nav>
   <div class="img"></div>
   <!-- Clickable Squares -->
   <div class="container">
-    <a href="workshop.html" class="square" data-text="Workshops">
+    <a href="{% url 'workshop' %}" class="square" data-text="Workshops">
       <!-- You can put an image or icon here -->
       <!-- Example with an icon using Font Awesome -->
         <i class="bi bi-person-video3" style="font-size: 70px;"></i>
@@ -166,7 +166,7 @@
       <!-- Example with an icon using Font Awesome -->
        <i class="bi bi-journal-text" style="font-size: 70px;"></i>
     </a>
-    <a href="" class="square" data-text="Info board">
+    <a href="{%  url 'parboardpsy' %}" class="square" data-text="Info board">
       <!-- You can put an image or icon here -->
       <!-- Example with an icon using Font Awesome -->
      <i class="bi bi-layout-text-window-reverse" style="font-size: 66px;" ></i>

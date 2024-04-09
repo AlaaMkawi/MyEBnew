@@ -83,6 +83,7 @@ urlpatterns = [
     path('get_parop_information/', views.get_parop_information, name='get_parop_information'),
 
   #SHAHD
+    path('psychologist_onParentSide/', views.psychologist_onParentSide, name='psychologist_onParentSide'),
     path('workshop/', views.workshops, name='workshop'),
     path('create_workshop/', views.create_workshop, name='create_workshop'),
     path('Parent_profile/', views.Parent_profile, name='profile'),
@@ -91,6 +92,9 @@ urlpatterns = [
     path('Parent_editProfile/', views.Parent_editProfile, name='Parent_editProfile'),
     path('Ped_editProfile/', views.Ped_editProfile, name='Ped_editProfile'),
     path('Psy_editProfile/', views.Psy_editProfile, name='Psy_editProfile'),
-    path('meeting_board/<int:meeting_id>/', views.meeting_board, name='meeting_board'),
+    path('meeting_board/', views.meeting_board, name='meeting_board'),
+    path('pediatrician_profView/', views.pediatrician_profView, name='pediatrician_profView'),
+    path('psychologist_profView/', views.psychologist_profiView, name='psychologist_profView'),
+    path('parent_profView/', views.parent_profView, name='parent_profView'),
 
 ]
