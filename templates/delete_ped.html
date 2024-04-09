@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Delete Account PAR</title>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/delete_ped.css' %}">
+    </head>
+    <body>
+            <nav>
+                <div class="menu">
+                    <div class="logo">
+                    <a href="#">Delete Account :(</a>
+                    </div>
+                    <ul>
+                        <li><a href="{% url 'pedhomepage' %}">Home</a></li>
+                    </ul>
+                 </div>
+            </nav>
+            <form method="post" action="">
+                  {% csrf_token %}
+                  <!-- Display error messages -->
+                  {% if messages %}
+                    {% for message in messages %}
+                      <p class="error-message">{{ message }}</p>
+                    {% endfor %}
+                  {% endif %}
+                  <input type="text" value="" placeholder="Username" name="username" id="username" />
+                  <input type="password" value="" placeholder="Password" name="password" id="password" />
+                  <input type="email" value="" placeholder="Email" name="email" id="email" />
+                  <button type="submit" name="check_details">Check Details</button>
+            </form>
+    </body>
+</html>

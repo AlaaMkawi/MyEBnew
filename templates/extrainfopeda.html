@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/extrainfopeda.css' %}">
+    <title>Home</title>
+    <style>
+    </style>
+</head>
+<body>
+  <nav>
+        <div class="menu">
+            <div class="logo">
+                <a href="#">Extra Information</a>
+            </div>
+            <ul>
+                <li><a href="{% url 'pedhomepage' %}">Home</a></li>
+                <li><a href="{% url 'add_extra_informationa' %}">Add</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Extra Information</h1>
+    <ul>
+        {% for info in extra_info %}
+        <li>
+            <h2>{{ info.title }}</h2>
+            <p>{{ info.content }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

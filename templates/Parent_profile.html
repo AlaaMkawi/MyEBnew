@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000; /* Changed text color to black */
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #ffffff;
+            color: #59848d;
+            padding: 10px 0;
+        }
+        .menu {
+            max-width: 1250px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .menu .logo a {
+            text-decoration: none;
+            color: #5e8e9a;
+            font-size: 35px;
+            font-weight: 600;
+        }
+        .menu ul {
+            display: inline-flex;
+        }
+        .menu ul li {
+            list-style: none;
+            margin-left: 7px;
+        }
+        .menu ul li:first-child {
+            margin-left: 0px;
+        }
+        .menu ul li a {
+            text-decoration: none;
+            color: #59848d;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .menu ul li a:hover {
+            background: #5e8e9a;
+            color: #ffffff;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-info {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block; /* Added to make labels appear on separate lines */
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="button"],
+        button[type="submit"] {
+            background-color: #538d9a;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-right: 5px; /* Added to create spacing between buttons */
+        }
+        button[type="button"]:hover,
+        button[type="submit"]:hover {
+            background-color: #126173;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="menu">
+            <div class="logo">
+                <a href="#">Profile :)</a>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Comment</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <!-- Profile Section -->
+<h1>My Profile</h1>
+<div class="profile-info">
+    <form method="post" id="profileForm"> <!-- Added id attribute to the form -->
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required><br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required><br>
+        <label for="email" class="email-label">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="phone_number">Phone Number:</label>
+        <input type="tel" id="phone_number" name="phone_number" required><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br>
+        <label for="child_age">Child's Age:</label>
+        <input type="number" id="child_age" name="child_age" required><br>
+        <label for="child_gender">Child's Gender:</label>
+        <select id="child_gender" name="child_gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br>
+        <label for="challenges">Challenges:</label>
+        <input type="text" id="challenges" name="challenges" required><br>
+        <a href="Parent_editProfile.html">
+            <button type="button">Edit</button>
+        </a>
+        <button type="submit">Save</button>
+    </form>
+</div>
+<script>
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Get form data
+    var firstName = document.getElementById('first_name').value;
+    var lastName = document.getElementById('last_name').value;
+    var email = document.getElementById('email').value;
+    var phoneNumber = document.getElementById('phone_number').value;
+    var age = document.getElementById('age').value;
+    var gender = document.getElementById('gender').value; // Changed to get value from select element
+    var childAge = document.getElementById('child_age').value;
+    var childGender = document.getElementById('child_gender').value; // Changed to get value from select element
+    var challenges = document.getElementById('challenges').value;
+
+    // Save data to localStorage with a unique key for the parent profile
+    var parentProfileData = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNumber: phoneNumber,
+        age: age,
+        gender: gender,
+        childAge: childAge,
+        childGender: childGender,
+        challenges: challenges
+    };
+    localStorage.setItem('parentUserProfile', JSON.stringify(parentProfileData));
+
+    // Redirect to another page or handle it accordingly
+    window.location.href = 'parent_profView.html';
+});
+
+    </script>
+
+</body>
+</html>

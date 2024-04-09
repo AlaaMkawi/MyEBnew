@@ -1,0 +1,34 @@
+<!-- chat.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychologist Chat</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <div id="chat-window">
+        <div id="chat-messages"></div>
+        <input type="text" id="message-input">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var messageInput = document.getElementById('message-input');
+            var message = messageInput.value;
+            var messagesDiv = document.getElementById('chat-messages');
+            var newMessage = document.createElement('div');
+            newMessage.textContent = 'Parent: ' + message;
+            messagesDiv.appendChild(newMessage);
+            // Here you would send the message to the backend and handle the response
+            // For simplicity, we are only displaying the message on the parent's side
+            messageInput.value = ''; // Clear the input field after sending the message
+        }
+    </script>
+</body>
+</html>

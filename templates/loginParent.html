@@ -38,7 +38,7 @@
             width: 100%;
             padding: 10px;
             border: none;
-            background-color: #BC8F8FFF;
+            background-color: #538d9a;
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
@@ -46,14 +46,27 @@
         }
 
         button:hover {
-            background-color: #BC8F8FFF;
+            background-color: #538d9a;
+        }
+        
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-<form method="post" action="">
-    {% csrf_token %}
-    <input type="text" value="" placeholder="Username" name="username" id="username" />
-    <input type="password" value="" placeholder="Password" name="password" id="password" />
-    <button>log in</button>
-</form>
+    <form method="post" action="">
+        {% csrf_token %}
+        <!-- Display error messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error-message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <input type="text" value="" placeholder="Username" name="username" id="username" />
+        <input type="password" value="" placeholder="Password" name="password" id="password" />
+        <button>Log in</button>
+    </form>
+</body>
+</html>

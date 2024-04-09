@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Account</title>
+<link rel="stylesheet" type="text/css" href="{% static '/css/delete_confirm_ped.css' %}">
+</head>
+<body>
+        {% if user %}
+            <nav>
+                    <div class="menu">
+                        <div class="logo">
+                        <a href="#">Delete Account :(</a>
+                        </div>
+                        <ul>
+                            <li><a href="{% url 'pedhomepage' %}">Home</a></li>
+                        </ul>
+                     </div>
+            </nav>
+        <form method="post" action="">
+            {% csrf_token %}
+            <h1>Delete Account!</h1>
+            <br>
+            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            <input type="hidden" name="username" value="{{ user.username }}">
+            <input type="hidden" name="password" value="{{ user.password }}">
+            <input type="hidden" name="email" value="{{ user.email }}">
+            <button type="submit" class="btn" name="confirm">Yes, delete my account</button>
+            <button type="submit" name="cancel">Cancel</button>
+        </form>
+        {% endif %}
+<script>
+</script>
+</body>
+</html>
+

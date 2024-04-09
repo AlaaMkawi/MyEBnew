@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #7aabb2;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .sent {
+            text-align: right;
+            background-color: #DCF8C6;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            float: right;
+            clear: both;
+            max-width: 70%;
+            margin-top: 5px;
+            margin-right: 10px;
+            padding: 10px;
+        }
+
+        .received {
+            text-align: left;
+            background-color: #EDEDED;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            float: left;
+            clear: both;
+            max-width: 70%;
+            margin-top: 5px;
+            margin-left: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>List of Existing Data</h1>
+        <li><a href="{% url 'parhomepage' %}">Home</a></li>
+    </header>
+
+    <section>
+        <ul>
+            {% for data in data_list %}
+                <li class="{% cycle 'sent' 'received' %}">
+                    <p>{{ data.name }}: {{ data.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+</html>

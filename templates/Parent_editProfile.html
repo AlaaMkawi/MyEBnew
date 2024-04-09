@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000; /* Changed text color to black */
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #ffffff;
+            color: #538d9a;
+            padding: 10px 0;
+        }
+        .menu {
+            max-width: 1250px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .menu .logo a {
+            text-decoration: none;
+            color: #59848d;
+            font-size: 35px;
+            font-weight: 600;
+        }
+        .menu ul {
+            display: inline-flex;
+        }
+        .menu ul li {
+            list-style: none;
+            margin-left: 7px;
+        }
+        .menu ul li:first-child {
+            margin-left: 0px;
+        }
+        .menu ul li a {
+            text-decoration: none;
+            color: #5e8e9a;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .menu ul li a:hover {
+            background: #5e8e9a;
+            color: #538d9a;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-info {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block; /* Added to make labels appear on separate lines */
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #59848d;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button[type="submit"]:hover {
+            background-color: #126173;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="menu">
+            <div class="logo">
+                <a href="#">Profile :)</a>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Comment</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Edit Profile Section -->
+    <h1>Edit Profile</h1>
+    <div class="profile-info">
+        <form method="post" id="editProfileForm">
+            <!-- Populate form fields with existing profile data -->
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required><br>
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required><br>
+            <label for="email" class="email-label">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="phone_number">Phone Number:</label>
+            <input type="tel" id="phone_number" name="phone_number" required><br>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select><br>
+            <label for="child_age">Child's Age:</label>
+            <input type="number" id="child_age" name="child_age" required><br>
+            <label for="child_gender">Child's Gender:</label>
+            <select id="child_gender" name="child_gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select><br>
+            <label for="challenges">Challenges:</label>
+            <input type="text" id="challenges" name="challenges" required><br>
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <script>
+    // JavaScript code to pre-fill form fields with existing profile data
+
+    // Retrieve parent profile information from localStorage
+    var parentUserProfileData = localStorage.getItem('parentUserProfile');
+    if (parentUserProfileData) {
+        // If parent profile exists, pre-fill the form fields
+        var profileData = JSON.parse(parentUserProfileData);
+        document.getElementById('first_name').value = profileData.firstName;
+        document.getElementById('last_name').value = profileData.lastName;
+        document.getElementById('email').value = profileData.email;
+        document.getElementById('phone_number').value = profileData.phoneNumber;
+        document.getElementById('age').value = profileData.age;
+        document.getElementById('gender').value = profileData.gender;
+        document.getElementById('child_age').value = profileData.childAge;
+        document.getElementById('child_gender').value = profileData.childGender;
+        document.getElementById('challenges').value = profileData.challenges;
+    } else {
+        // If parent profile doesn't exist, display an error message or handle accordingly
+        alert('Parent profile data not found. Please create a profile.');
+        // You can redirect the user to the add profile page or handle it differently
+        // window.location.href = 'parent_addProfile.html';
+    }
+
+    // JavaScript code to handle form submission and update profile data
+    document.getElementById('editProfileForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get updated form data
+        var updatedProfileData = {
+            firstName: document.getElementById('first_name').value,
+            lastName: document.getElementById('last_name').value,
+            email: document.getElementById('email').value,
+            phoneNumber: document.getElementById('phone_number').value,
+            age: document.getElementById('age').value,
+            gender: document.getElementById('gender').value,
+            childAge: document.getElementById('child_age').value,
+            childGender: document.getElementById('child_gender').value,
+            challenges: document.getElementById('challenges').value
+        };
+
+        // Update profile data in localStorage
+        localStorage.setItem('parentUserProfile', JSON.stringify(updatedProfileData));
+
+        // Redirect the user to view profile page
+        window.location.href = 'parent_profView.html';
+    });
+</script>
+
+</body>
+</html>
