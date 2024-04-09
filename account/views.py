@@ -27,6 +27,9 @@ from .models import Paropinion
 from .forms import MeetingForm
 from django.contrib.auth.decorators import login_required
 from .models import Meeting
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from .forms import SummaryForm
 
 
 
@@ -59,8 +62,6 @@ def psychomepage(request):
     return render(request, 'pyschhomepage.html')
 
 
-def homepageforpys(request):
-    return render(request, 'homepageforpys.html')
 
 
 def schedulepys(request):
@@ -115,17 +116,10 @@ def aboutus(request):
     return render(request, 'aboutus.html')
 
 
-def contactus(request):
-    return render(request, 'contactus.html')
-
-
 def extrainfo(request, extrainfo=None):
     extrainfo = extrainfo.objects.all()
     return render(request, 'extrainfo.html', {extrainfo: extrainfo})
 
-
-def parenthomepage(request):
-    return render(request, 'parenthomepage.html')
 
 
 def Schedule(request):
@@ -178,9 +172,6 @@ def successpage(request):
     return render(request, 'successhomepage.html')
 
 
-def homepageforparents(request):
-    return render(request, 'homepageforparents.html')
-
 
 def logout_view(request):
     logout(request)
@@ -196,10 +187,6 @@ def contact_doctor(request):
     return render(request, 'contact_doctor.html')
 
 
-def articls(request):
-    return render(request, 'articls.html')
-
-
 def chatpys(request):
     return render(request, 'chatpys.html')
 
@@ -207,26 +194,10 @@ def chatpys(request):
 def meeting(request):
     return render(request, 'meeting.html')
 
-
-def feedback(request):
-    return render(request, 'feedback.html')
-
-def articls(request):
-    return render(request,'articls.html')
 def parent_comment(request):
     return render(request, 'parent_comment.html')
 
 
-
-def feedback_submit(request):
-    if request.method == 'POST':
-        form = FeedbackForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('parhomepage')
-    else:
-        form = FeedbackForm()
-    return render(request, 'feedbackl.html', {'form': form})
 
 def thank_you(request):
     return render(request, 'thank_you.html')
@@ -264,9 +235,6 @@ def summary_workshop(request):
 
 # views.py
 
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from .forms import SummaryForm
 
 
 def submit_summary(request):
@@ -300,9 +268,6 @@ def comment_success(request):
     return render(request, 'comment_success.html')
 def add_comment(request):
     return render(request, 'add_comment.html')
-
-def homepagefordoctors(request):
-    return render(request, 'homepagefordoctors.html')
 
 
 
@@ -593,26 +558,6 @@ def get_parop_information(request):
 
 
 
-def parent_profView(request, parent_id):
-    parent = Parent.objects.get(phone=parent_id)
-    return render(request, 'parent_profView.html', {'parent': parent})
-
-
-def pediatrician_profView(request,pediatrician_id):
-   # pediatrician = Pediatrician.objects.first()
-   pediatrician = Pediatrician.objects.get(id=pediatrician_id)
-   logged_in_pediatrician = Pediatrician.objects.get(user=request.user)
-
-   context = {
-       'pediatrician': logged_in_pediatrician
-   }
-
-  # return render(request, 'pediatrician_profile.html', context)
-   return render(request, 'pediatrician_profView.html', {'pediatrician': pediatrician},context)
-
-def psychologist_profiView(request):
-    psychologist = Psychologist.objects.first()
-    return render(request, 'psychologist_profView.html', {'psychologist': psychologist})
 
 def create_workshop(request):
     if request.method == 'POST':
@@ -631,34 +576,7 @@ def workshops(request):
     return render(request, 'workshop.html', {'workshops': workshops})
 
 
-@login_required
-def Parent_profile(request):
-   # profile = request.user.profile
-    return render(request, 'Parent_profile.html')
 
-@login_required
-def Parent_editProfile(request):
-       return render(request, 'Parent_editProfile.html')
-
-
-
-@login_required
-def Ped_profile(request):
-    #profile = request.user.profile
-    return render(request, 'Ped_profile.html')
-
-@login_required
-def Ped_editProfile(request):
-        return render(request, 'Ped_editProfile.html')
-
-@login_required
-def Psy_profile(request):
-    #profile = request.user.profile
-    return render(request, 'Psy_profile.html')
-
-@login_required
-def Psy_editProfile(request):
-     return render(request, 'Psy_editProfile.html')
 
 
 def meeting_board(request):
@@ -719,3 +637,48 @@ def content(request):
 
 def read(request):
     return render(request, 'read.html')
+
+def thank_you_pys(request):
+    return render(request, 'thank_you_pys.html')
+def thank_you_ped(request):
+    return render(request, 'thank_you_ped.html')
+
+def add_comment_pys(request):
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)  # השתמש בטופס שיצרת, אם קיים
+        if comment_form.is_valid():
+            comment_text = comment_form.cleaned_data['comment_text']
+            Comment.objects.create(comment_text=comment_text)
+            return redirect('thank_you_pys')  # לדוגמה, דף שמציג הודעה על הצלחת השליחה
+    else:
+        comment_form = CommentForm()  # אם הבקשה היא GET, הצג את הטופס
+
+    return render(request, 'add_comment.html', {'add_comment': comment_form})
+def add_comment_ped(request):
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)  # השתמש בטופס שיצרת, אם קיים
+        if comment_form.is_valid():
+            comment_text = comment_form.cleaned_data['comment_text']
+            Comment.objects.create(comment_text=comment_text)
+            return redirect('thank_you_ped')  # לדוגמה, דף שמציג הודעה על הצלחת השליחה
+    else:
+        comment_form = CommentForm()  # אם הבקשה היא GET, הצג את הטופס
+
+    return render(request, 'add_comment.html', {'add_comment': comment_form})
+
+
+def pys_comment(request):
+    return render(request, 'pys_comment.html')
+
+
+def submit_comment_pys(request):
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)  # השתמש בטופס שיצרת, אם קיים
+        if comment_form.is_valid():
+            comment_text = comment_form.cleaned_data['comment_text']
+            Comment.objects.create(comment_text=comment_text)
+            return redirect('thank_you_pys')  # לדוגמה, דף שמציג הודעה על הצלחת השליחה
+    else:
+        comment_form = CommentForm()  # אם הבקשה היא GET, הצג את הטופס
+
+    return render(request, 'comment_form.html', {'comment_form': comment_form})

@@ -13,19 +13,19 @@ admin.site.register(Psychologist)
 admin.site.register(InformationBoard)
 admin.site.register(ExtraInfo)
 admin.site.register(Login)
-admin.site.register(Feedback)
+# admin.site.register(Feedback)
 admin.site.register(Comment)
 admin.site.register(WorkshopSummary)
 admin.site.register(PsychologistSchedule)
-admin.site.register(Traking)
+# admin.site.register(Traking)
 admin.site.register(Track)
 
 admin.site.register(PediatricianInfoBoard)
 admin.site.register(Paropinion)
 
-admin.site.register(Workshop)
-admin.site.register(Meeting)
-admin.site.register(Profile)
+# admin.site.register(Workshop)
+# admin.site.register(Meeting)
+# admin.site.register(Profile)
 
 
 
