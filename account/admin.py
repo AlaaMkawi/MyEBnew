@@ -8,7 +8,6 @@ from .models import Profile
 from .models import Parent
 
 admin.site.register(Parent)
-
 admin.site.register(Pediatrician)
 admin.site.register(Psychologist)
 admin.site.register(InformationBoard)

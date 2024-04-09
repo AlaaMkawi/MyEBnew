@@ -24,7 +24,7 @@ from .forms import PediatricianInfoBoard
 from .forms import *
 from .forms import Paropinionform
 from .models import Paropinion
-from .forms import ProfileForm ,MeetingForm
+from .forms import MeetingForm
 from django.contrib.auth.decorators import login_required
 from .models import Meeting
 
@@ -39,7 +39,7 @@ def loginpsychologist(request):
             users_in_group = Group.objects.get(name='Psychologist').user_set.all()
             if user in users_in_group:
                 login(request, user)
-                return redirect('homepageforpys')
+                return redirect('psychomepage')
             else:
                 messages.info(request, 'Username or password incorrect')
         else:
@@ -305,20 +305,6 @@ def homepagefordoctors(request):
     return render(request, 'homepagefordoctors.html')
 
 
-
-def add_data(request):
-    if request.method == 'POST':
-        form = BabyHealthForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('view_data')
-    else:
-        form = BabyHealthForm()
-    return render(request, 'add_data.html', {'form': form})
-
-def view_data(request):
-    data_list = BabyHealth.objects.all()
-    return render(request, 'view_data.html', {'data_list': data_list})
 
 
 def psyinfoboard(request):
@@ -685,4 +671,45 @@ def psychologist_onParentSide(request):
     return render(request, 'psychologist_onParentSide.html')
 
 
+
+
+def add_data_psy(request):
+    if request.method == 'POST':
+        form = BabyHealthForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_data')
+    else:
+        form = BabyHealthForm()
+    return render(request, 'add_data_psy.html', {'form': form})
+def add_data_ped(request):
+    if request.method == 'POST':
+        form = BabyHealthForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_data')
+    else:
+        form = BabyHealthForm()
+    return render(request, 'add_data_ped.html', {'form': form})
+def add_data(request):
+    if request.method == 'POST':
+        form = BabyHealthForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_data')
+    else:
+        form = BabyHealthForm()
+    return render(request, 'add_data.html', {'form': form})
+
+def view_data(request):
+    data_list = BabyHealth.objects.all()
+    return render(request, 'view_data.html', {'data_list': data_list})
+
+def view_data_psy(request):
+    data_list = BabyHealth.objects.all()
+    return render(request, 'view_data_psy.html', {'data_list': data_list})
+
+def view_data_ped(request):
+    data_list = BabyHealth.objects.all()
+    return render(request, 'view_data_ped.html', {'data_list': data_list})
 

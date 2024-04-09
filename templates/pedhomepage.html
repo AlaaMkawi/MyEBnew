@@ -147,8 +147,11 @@ opacity: 1; /* Show the word on hover */
 <a href="#">Pediatrician :)</a>
 </div>
 <ul>
-<li><a href="#">comments</a></li>
-<li><a href="#">more</a></li>
+<li><a href="{% url 'parent_comments' %}">comments</a></li>
+<li><a href="{% url 'add_data' %}">Chat</a></li>
+<li><a href="{% url 'delete_' %}">Delete Account</a></li>
+ <li><a href="{% url 'logout' %}">Log Out</a></li>
+
 
 </ul>
 </div>

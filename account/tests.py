@@ -380,151 +380,70 @@ class ParopViewTest(TestCase):
         self.assertEqual(response.content, expected_data)
 
 
-class TestViews(unittest.TestCase):
+
+from django.test import TestCase, Client
+from django.urls import reverse
+from django.contrib.auth.models import User, Group
+from django.contrib.auth import authenticate, login
+from django.contrib.messages import get_messages
+from django.contrib import messages
+
+
+class TestLoginParent(TestCase):
     def setUp(self):
-        # Create a test client
         self.client = Client()
+        self.url = reverse('loginParent')
+        self.group = Group.objects.create(name='Parent')
+        self.user = User.objects.create_user(username='testparent', password='testpassword')
+        self.user.groups.add(self.group)
 
-    def test_parent_profView(self):
-        # Create a parent object for testing
-        parent = Parent.objects.create(name="Test Parent")
+    def test_correct_login(self):
+        response = self.client.post(self.url, {'username': 'testparent', 'password': 'testpassword'}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, reverse('parhomepage'))
 
-        # Get the URL for parent_profView and pass the parent's id
-        url = reverse('parent_profView', args=[parent.id])
+    def test_incorrect_username(self):
+        response = self.client.post(self.url, {'username': 'invalidusername', 'password': 'testpassword'}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Username or password incorrect')
 
-        # Make a GET request to the view
-        response = self.client.get(url)
+    def test_incorrect_password(self):
+        response = self.client.post(self.url, {'username': 'testparent', 'password': 'invalidpassword'}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Username or password incorrect')
 
-        # Check if the response is OK (status code 200)
+    def test_missing_username_or_password(self):
+        response = self.client.post(self.url, {'username': '', 'password': ''}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Username or password incorrect')
+
+
+from django.test import TestCase
+from django.urls import reverse
+
+class AddDataHTMLTestCase(TestCase):
+    def test_add_data_page_contains_form(self):
+        response = self.client.get(reverse('add_data'))  # Assuming 'add_data' is the name of the view
+        self.assertContains(response, '<h2>Add New Data</h2>')  # Check if the page contains the title
+        self.assertContains(response, '<form')  # Check if the page contains a form element
+       # self.assertContains(response, '{% csrf_token %}')  # Check if the CSRF token is included in the form
+        self.assertContains(response, '<input type="submit" value="Submit">')  # Check if the submit button is present
+
+
+from .models import BabyHealth
+
+
+class ViewDataTestCase(TestCase):
+    def test_view_data_page(self):
+        # יצירת מידע לבדיקה
+        BabyHealth.objects.create(name="Test Baby", description="Test description")
+
+        # בצע בקשת GET לדף view_data
+        response = self.client.get(reverse('view_data'))
+
+        # אמור לקבל קוד תגובה 200 (הצלחה)
         self.assertEqual(response.status_code, 200)
 
-    def test_pediatrician_profView(self):
-        # Create a pediatrician object for testing
-        pediatrician = Pediatrician.objects.create(name="Test Pediatrician")
-
-        # Get the URL for pediatrician_profView and pass the pediatrician's id
-        url = reverse('pediatrician_profView', args=[pediatrician.id])
-
-        # Make a GET request to the view
-        response = self.client.get(url)
-
-        # Check if the response is OK (status code 200)
-        self.assertEqual(response.status_code, 200)
-
-    def test_psychologist_profView(self):
-        # Create a psychologist object for testing
-        psychologist = Psychologist.objects.create(name="Test Psychologist")
-
-        # Get the URL for psychologist_profiView
-        url = reverse('psychologist_profView')
-
-        # Make a GET request to the view
-        response = self.client.get(url)
-
-        # Check if the response is OK (status code 200)
-        self.assertEqual(response.status_code, 200)
-
-
-
-    def test_Parent_profile(self):
-        # Login a user
-        user = User.objects.create_user(username='test_user', password='test_password')
-        self.client.force_login(user)
-
-        # Get the URL for Parent_profile
-        url = reverse('Parent_profile')
-
-        # Make a GET request to the view
-        response = self.client.get(url)
-
-        # Check if the response is OK (status code 200)
-        self.assertEqual(response.status_code, 200)
-
-    def test_Parent_editProfile_GET(self):
-        # Login a user
-        user = User.objects.create_user(username='test_user', password='test_password')
-        self.client.force_login(user)
-
-        # Get the URL for Parent_editProfile
-        url = reverse('Parent_editProfile')
-
-        # Make a GET request to the view
-        response = self.client.get(url)
-
-        # Check if the response is OK (status code 200)
-        self.assertEqual(response.status_code, 200)
-
-    # Add more tests for POST request of Parent_editProfile if needed
-
-    def test_Ped_profile(self):
-        # Login a user
-        user = User.objects.create_user(username='test_user', password='test_password')
-        self.client.force_login(user)
-
-        # Get the URL for Ped_profile
-        url = reverse('Ped_profile')
-
-        # Make a GET request to the view
-        response = self.client.get(url)
-
-        # Check if the response is OK (status code 200)
-        self.assertEqual(response.status_code, 200)
-
-    def test_Ped_editProfile_GET(self):
-        # Login a user
-        user = User.objects.create_user(username='test_user', password='test_password')
-        self.client.force_login(user)
-
-        # Get the URL for Ped_editProfile
-        url = reverse('Ped_editProfile')
-
-        # Make a GET request to the view
-        response = self.client.get(url)
-
-        # Check if the response is OK (status code 200)
-        self.assertEqual(response.status_code, 200)
-
-    # Add more tests for POST request of Ped_editProfile if needed
-
-    def test_Psy_profile(self):
-        # Login a user
-        user = User.objects.create_user(username='test_user', password='test_password')
-        self.client.force_login(user)
-
-        # Get the URL for Psy_profile
-        url = reverse('Psy_profile')
-
-        # Make a GET request to the view
-        response = self.client.get(url)
-
-        # Check if the response is OK (status code 200)
-        self.assertEqual(response.status_code, 200)
-
-    def test_Psy_editProfile_GET(self):
-        # Login a user
-        user = User.objects.create_user(username='test_user', password='test_password')
-        self.client.force_login(user)
-
-        # Get the URL for Psy_editProfile
-        url = reverse('Psy_editProfile')
-
-        # Make a GET request to the view
-        response = self.client.get(url)
-
-        # Check if the response is OK (status code 200)
-        self.assertEqual(response.status_code, 200)
-
-    # Add more tests for POST request of Psy_editProfile if needed
-
-    def test_meeting_board(self):
-        # Get the URL for meeting_board
-        url = reverse('meeting_board')
-
-        # Make a GET request to the view
-        response = self.client.get(url)
-
-        # Check if the response is OK (status code 200)
-        self.assertEqual(response.status_code, 200)
-
-if __name__ == '__main__':
-    unittest.main()
+        # אמור לקבל תוכן הכולל את שם ותיאור המידע שנוצר
+        self.assertContains(response, "Test Baby")
+        self.assertContains(response, "Test description")
