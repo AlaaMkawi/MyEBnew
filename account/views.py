@@ -26,7 +26,7 @@ from .forms import Paropinionform
 from .models import Paropinion
 from .forms import ProfileForm ,MeetingForm
 from django.contrib.auth.decorators import login_required
-from .models import parent,pediatrician, psychologist ,Meeting
+from .models import Meeting
 
 
 
@@ -608,25 +608,25 @@ def get_parop_information(request):
 
 
 def parent_profView(request, parent_id):
-    parent = parentN.objects.get(id=parent_id)
-    return render(request, 'parent_profView.html')
+    parent = Parent.objects.get(phone=parent_id)
+    return render(request, 'parent_profView.html', {'parent': parent})
 
 
 def pediatrician_profView(request,pediatrician_id):
-   pediatrician = pediatricianN.objects.first()
-   pediatrician = pediatricianN.objects.get(id=pediatrician_id)
-   logged_in_pediatrician = pediatrician.objects.get(user=request.user)
+   # pediatrician = Pediatrician.objects.first()
+   pediatrician = Pediatrician.objects.get(id=pediatrician_id)
+   logged_in_pediatrician = Pediatrician.objects.get(user=request.user)
 
    context = {
        'pediatrician': logged_in_pediatrician
    }
 
   # return render(request, 'pediatrician_profile.html', context)
-   return render(request, 'pediatrician_profView.html')
+   return render(request, 'pediatrician_profView.html', {'pediatrician': pediatrician},context)
 
 def psychologist_profiView(request):
-    psychologist = psychologistN.objects.first()
-    return render(request, 'psychologist_profView.html')
+    psychologist = Psychologist.objects.first()
+    return render(request, 'psychologist_profView.html', {'psychologist': psychologist})
 
 def create_workshop(request):
     if request.method == 'POST':
@@ -675,16 +675,14 @@ def Psy_editProfile(request):
      return render(request, 'Psy_editProfile.html')
 
 
-#def meeting_board(request):
-    #meetings = Meeting.objects.all()
-    #return render(request, 'meeting_board.html', {'meetings': meetings})
+def meeting_board(request):
+    meetings = Meeting.objects.all()
+    return render(request, 'meeting_board.html')
 
 
 
 def psychologist_onParentSide(request):
     return render(request, 'psychologist_onParentSide.html')
 
-def meeting_board(request):
-    return render(request, 'meeting_board.html')
 
 

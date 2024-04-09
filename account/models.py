@@ -13,7 +13,16 @@ class Parent(models.Model):
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True, null=True)
     parantId = models.IntegerField(default=0)
-
+#SHAHD
+    first_name = models.CharField(max_length=100, default='')
+    last_name = models.CharField(max_length=100, default='')
+    #age = models.PositiveIntegerField(default=0)  # Set a default value, such as 0
+    gender = models.CharField(max_length=10, default='')  # Set a default value, such as an empty string
+    child_age = models.PositiveIntegerField(default=0)  # Set a default value, such as 0
+    child_gender = models.CharField(max_length=10, default='')  # Set a default value, such as an empty string
+    challenges = models.TextField(default='')  # Set a default value, such as an empty string
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class Pediatrician(models.Model):
     name = models.CharField(max_length=50, null=True)
@@ -23,7 +32,17 @@ class Pediatrician(models.Model):
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True, null=True)
     PediatricianId = models.IntegerField(default=0)
+    first_name = models.CharField(max_length=100, default='')
+    last_name = models.CharField(max_length=100, default='')
+    gender = models.CharField(max_length=10, default='')  # Set a default value, such as an empty string
+    phone_number = models.CharField(max_length=15, default='')  # Set a default value, such as an empty string
+    specialization = models.CharField(max_length=100, default='')  # Set a default value, such as an empty string
+    experience_years = models.PositiveIntegerField(default=0)  # Set a default value, such as 0
+    qualification = models.CharField(max_length=100, default='')  # Set a default value, such as an empty string
+    user = models.OneToOneField(User, on_delete=models.CASCADE,default='')
 
+    def __str__(self):
+             return f"{self.first_name} {self.last_name}"
 
 class Psychologist(models.Model):
     name = models.CharField(max_length=50, null=True)
@@ -33,7 +52,17 @@ class Psychologist(models.Model):
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     PsychologistId = models.IntegerField(default=0)
+    first_name = models.CharField(max_length=100, default='')
+    last_name = models.CharField(max_length=100, default='')
+    gender = models.CharField(max_length=10, default='')  # Set a default value, such as an empty string
+    phone_number = models.CharField(max_length=15, default='')  # Set a default value, such as an empty string
+    specialization = models.CharField(max_length=100, default='')  # Set a default value, such as an empty string
+    experience_years = models.PositiveIntegerField(default=0)  # Set a default value, such as 0
+    qualification = models.CharField(max_length=100, default='')  # Set a default value, such as an empty string
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default='')
 
+    def __str__(self):
+             return f"{self.first_name} {self.last_name}"
 
 class InformationBoard(models.Model):
     title = models.CharField(max_length=200)
@@ -140,49 +169,6 @@ class Paropinion(models.Model):
         return self.content
 
 
-#SHAHD
-
-class parentN(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15)
-    age = models.PositiveIntegerField()
-    gender = models.CharField(max_length=10)
-    child_age = models.PositiveIntegerField()
-    child_gender = models.CharField(max_length=10)
-    challenges = models.TextField()
-
-
-class pediatricianN(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField()
-    age = models.PositiveIntegerField()
-    gender = models.CharField(max_length=10)
-    phone_number = models.CharField(max_length=15)
-    specialization = models.CharField(max_length=100)
-    experience_years = models.PositiveIntegerField()
-    qualification = models.CharField(max_length=100)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-class psychologistN(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField()
-    age = models.PositiveIntegerField()
-    gender = models.CharField(max_length=10)
-    phone_number = models.CharField(max_length=15)
-    specialization = models.CharField(max_length=100)
-    experience_years = models.PositiveIntegerField()
-    qualification = models.CharField(max_length=100)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
 
 
 class Profile(models.Model):

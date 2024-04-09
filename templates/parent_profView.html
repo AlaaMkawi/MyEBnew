@@ -103,7 +103,7 @@
             </div>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Commentt</a></li>
+                <li><a href="#">Comments</a></li>
             </ul>
         </div>
     </nav>
@@ -115,11 +115,10 @@
     </div>
 
    <script>
-    var parentUserProfileData = localStorage.getItem('parentUserProfile'); // Change key to 'parentUserProfile'
+    var parentUserProfileData = localStorage.getItem('parentUserProfile');
     if (parentUserProfileData) {
         var profileData = JSON.parse(parentUserProfileData);
         var profileInfoDiv = document.getElementById('profileInfo');
-        // Display parent profile information
         profileInfoDiv.innerHTML = `
             <p><strong>First Name:</strong> ${profileData.firstName}</p>
             <p><strong>Last Name:</strong> ${profileData.lastName}</p>
